@@ -34,8 +34,8 @@
 - `python -m eval.run_eval` → new run directory with full outputs + fingerprint; human check in `eval/MANUAL_REVIEW.md`.
 - Reported run: Q1–Q4 `success`, expected sources cited, 0 invalid citations; out-of-corpus control (lisinopril)
   → `insufficient_evidence`, no citations.
-- Critic at work: Q3 first draft attributed one label's instruction to both labels and omitted the sertraline
-  protein-binding instruction → flagged → one revision fixed both.
+- Critic at work: Q3 first draft implied routine warfarin dose adjustment when sertraline starts and omitted the
+  sertraline protein-binding instruction → flagged → one revision fixed both.
 - Q4: answer states that "25 mL/min" is not body-surface indexed while the label threshold is mL/min/1.73 m².
 
 ## 8:00–9:00 · Live demo

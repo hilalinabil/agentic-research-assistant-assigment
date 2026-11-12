@@ -1,58 +1,64 @@
 # Manual review of the reported evaluation run
 
-Reported run: [`results/2026-11-12T11-04-16Z/`](results/2026-11-12T11-04-16Z/RESULTS.md) — chat model `gpt-5.6-terra`,
-embeddings `text-embedding-3-small`, code+corpus fingerprint `512d5d9ab30a5160` (code changed slightly afterwards; see [`results/README.md`](results/README.md)).
+Reported run: [`results/2026-11-12T11-32-54Z/`](results/2026-11-12T11-32-54Z/RESULTS.md) — chat model `gpt-5.6-terra`, embeddings
+`text-embedding-3-small`, code+corpus fingerprint `e53b19be1dd283d5` (identical to the submitted code).
 
-Method: each answer was read next to the cited lines of the source files; narrowed citations (≤2 lines) were also
-checked mechanically against the cited source text. No numeric score is given; an LLM judge would not be ground truth.
+Method: each answer was read next to the cited lines of the source files. No numeric score is given; an LLM judge
+would not be ground truth.
 
 | ID | Status | Expected sources cited | Valid / invalid citations | Tool calls | Revised | Human check |
 |---|---|---|---|---|---|---|
-| Q1 | success | yes | 11 / 0 | 2 | no | Correct and complete |
-| Q2 | success | yes | 18 / 0 | 4 | yes | Correct |
-| Q3 | success | yes | 6 / 0 | 8 | yes | Correct; one relevant instruction omitted (see below) |
-| Q4 | success | yes | 3 / 0 | 1 | no | Correct; unit assumption stated |
+| Q1 | success | yes | 1 / 0 | 1 | no | Correct and complete; one passage-level citation |
+| Q2 | success | yes | 12 / 0 | 4 | no | Correct |
+| Q3 | success | yes | 7 / 0 | 2 | yes | Correct and complete after one revision |
+| Q4 | success | yes | 2 / 0 | 3 | no | Correct; unit assumption stated |
 | X1 (control) | insufficient_evidence | n/a | 0 / 0 | 1 | no | Correct abstention, no citations |
 
 ## Q1 — Warfarin contraindications
-- Tools: search, then `read_source_document(dailymed-warfarin.md, "4 CONTRAINDICATIONS")` (L127–L146).
-- All items of §4 are listed (pregnancy with the mechanical-heart-valve exception, hemorrhagic tendencies/blood
-  dyscrasias, CNS/eye/traumatic surgery, bleeding tendencies, threatened abortion/eclampsia/preeclampsia, unsupervised
-  non-compliant patients, spinal puncture, hypersensitivity, major regional/lumbar block anesthesia, malignant
-  hypertension); single-line citations point to the exact list items.
+- Tools: one search (`warfarin contraindications FDA label`); the top hit was the whole §4 chunk (L129–L145), so the
+  model did not read the section separately.
+- All ten §4 items are present: pregnancy (with the mechanical-heart-valve exception), hemorrhagic tendencies/blood
+  dyscrasias, CNS/eye/traumatic surgery, bleeding tendencies (GI/GU/respiratory bleeding, CNS hemorrhage, cerebral
+  aneurysms, dissecting aorta, pericarditis/effusions, bacterial endocarditis), threatened abortion/eclampsia/
+  preeclampsia, unsupervised non-compliant patients, spinal puncture, hypersensitivity, major regional/lumbar block
+  anesthesia, malignant hypertension.
+- Every sentence cites the same passage range `dailymed-warfarin.md:L129-L145` — correct, but coarser than the
+  per-line citations produced when the model reads the section (as in Q2).
 
 ## Q2 — Warfarin vs apixaban
-- Tools: one search per drug, then the full §4 of each label.
-- Apixaban §4 (L108–L114): active pathological bleeding and severe hypersensitivity — reported exactly. Shared:
-  hypersensitivity, and bleeding-related contraindications at category level (different wording). Unique to warfarin:
-  pregnancy, procedures/anesthesia, threatened abortion/eclampsia, non-compliance, malignant hypertension. Correct.
-- Critic, first review: flagged that the draft presented warfarin-only bleeding conditions as definitively *not*
-  contraindications for apixaban, and that "shared" holds only at category level → revised → approved.
+- Tools: one search per drug, then the full §4 of each label (line-numbered reads).
+- Apixaban §4 (L108–L114): active pathological bleeding and severe hypersensitivity — reported exactly. Warfarin §4
+  items listed with narrowed citations inside the line-numbered read. Shared: hypersensitivity; bleeding-related
+  contraindications as a category with different wording. Unique to warfarin: pregnancy, procedures/anesthesia,
+  threatened abortion/eclampsia, non-compliance, malignant hypertension. Approved on first review.
+- Several narrowed ranges start a few lines early (e.g. `L135-L138` for the surgery item on L138); each range
+  contains the supporting line.
 
 ## Q3 — Warfarin + sertraline (multi-hop)
-- Tools: 4 searches, then 4 section reads across both labels (sertraline §5.3 and §7.1, warfarin §7.3 and §5.1).
-- Verified: SRIs increase bleeding risk and warfarin may add to it; anticoagulant + sertraline may potentiate bleeding;
-  "for patients taking warfarin, carefully monitor the INR" (sertraline L102–L107, L339–L342); warfarin Table 3 lists
-  sertraline and says to closely monitor (warfarin L251–L260); more frequent INR monitoring when other drugs are
-  started/stopped/dose-changed and therapeutic INR does not eliminate bleeding risk (warfarin L149–L155); bleeding
-  symptoms to report (warfarin §17 L428–L445).
-- Critic, first review: the draft cited `dailymed-warfarin.md:L428-L432`, a guessed range inside an unnumbered chunk;
-  the validator rejected it and the revision cited the retrieved passage range.
-- **Omission:** the sertraline protein-binding interaction ("monitor for adverse reactions and reduce the dosage of
-  sertraline or the other protein-bound drug as warranted", warfarin as example; sertraline §7.1) was in the evidence
-  but is not in the answer, and the critic did not request it. An earlier development run included it.
-- Minor: the opening sentence applies the warfarin label's general "other drugs started/stopped" monitoring rule to
-  sertraline; it cites both labels but is not marked "Interpretation:".
+- Tools: two searches (one framed from each drug); evidence from both DailyMed labels.
+- Verified: SRIs including sertraline increase bleeding risk and warfarin may add to it (sertraline L104–L106);
+  anticoagulant + sertraline may potentiate bleeding and "for patients taking warfarin, carefully monitor the INR"
+  (sertraline L324–L342); warfarin Table 3 lists sertraline and says to closely monitor (warfarin L253–L259); more
+  frequent INR monitoring when other drugs are started/stopped/dose-changed, and therapeutic INR does not
+  eliminate bleeding risk (warfarin L151–L157); additional INR tests when other medications start/stop (L93–L95);
+  protein-binding interaction: "monitor for adverse reactions and reduce the dosage of sertraline or the other
+  protein-bound drug as warranted" (sertraline L342–L357); bleeding symptoms to report (warfarin §17).
+- Critic, first review: flagged that the draft implied routine warfarin dose adjustment when sertraline starts, and
+  that the protein-binding instruction was missing → one revision fixed both.
+- The warfarin label's general "other drugs started/stopped" monitoring rule is applied to sertraline; both labels
+  are cited for that sentence.
 
 ## Q4 — Metformin at eGFR 25 mL/min
-- Correct: contraindicated below eGFR 30 mL/min/1.73 m² (§4 L46–L50); assess renal function before and periodically,
-  discontinue if eGFR later falls below 30 (§2.3 L34–L38). Label units reproduced exactly.
-- The answer states the unit assumption: the question's "25 mL/min" is not body-surface indexed, the label's threshold is.
+- Correct: contraindicated below eGFR 30 mL/min/1.73 m²; discontinue if eGFR falls below 30 during treatment;
+  initiation not recommended at 30–45 (DailyMed §2.3 L34–L38). MedlinePlus statement ("tell your doctor if you have
+  kidney disease … your doctor will probably tell you not to take metformin", L7–L17) reported accurately, with the
+  note that it gives no numeric cutoff.
+- The answer states the unit assumption: "25 mL/min" is not body-surface indexed, the label threshold is.
 
 ## X1 — Lisinopril (out-of-corpus control, not an assessment question)
-- Coverage note: no dedicated lisinopril document. The answer says the documents "do not contain information on the
-  recommended starting dose of lisinopril" — it does not claim that the drug or a dose does not exist — and has no
-  citations, so no unrelated file is listed as a source.
+- Retrieval returned unrelated passages (sertraline, atorvastatin dosing); none is cited. The answer states that the
+  documents "do not contain information on the recommended starting dose of lisinopril" — missing coverage, not a
+  claim that the drug or a dose does not exist.
 
 ## Issues investigated in this audit
 | Issue | Root cause (verified) | Fix |
@@ -69,8 +75,8 @@ A first version of the completeness rule was too broad (critic demanded unrelate
 qualify the answer.
 
 ## Remaining observations
-- Run-to-run variation: tool sequences, included details and critic findings differ between runs. The Q3
-  protein-binding instruction was included in one of the last two runs and omitted in the reported one — the
-  completeness rules reduce, but do not eliminate, omissions.
+- Run-to-run variation: tool sequences, citation granularity, included details and critic findings differ between
+  runs. In development runs the Q3 protein-binding instruction was sometimes omitted without the critic noticing;
+  in the reported run the critic caught it. The completeness rules reduce, but do not eliminate, omissions.
 - The number/unit check is a detector only: it flags numbers or units absent from the cited passages but cannot
   tell whether a present number is used correctly.

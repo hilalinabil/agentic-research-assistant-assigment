@@ -184,14 +184,14 @@ python -m eval.run_eval --report [RUN]  # re-render a run's RESULTS.md from its 
 
 Automatic checks are deterministic (expected sources cited, citation validity, status). There is no LLM-as-judge score.
 
-Reported run `2026-11-12T11-04-16Z` (gpt-5.6-terra; later code changes listed in `eval/results/README.md`): Q1–Q4 `success`, all expected
-sources cited, 0 invalid citations, 15–40 s per question; X1 `insufficient_evidence` with no citations. Known
-weakness in that run: Q3 omits the sertraline protein-binding instruction (see the manual review).
+Reported run `2026-11-12T11-32-54Z` (gpt-5.6-terra, same code as this repository): Q1–Q4 `success`, all expected
+sources cited, 0 invalid citations, 16–33 s per question; X1 `insufficient_evidence` with no citations. In that
+run the critic caught an omission in Q3 and one revision fixed it (see the manual review).
 
 ## Known limitations
 
 - Answers vary between runs (LLM non-determinism); the critic does not always catch the same omissions
-  (e.g. the Q3 protein-binding instruction is included in some runs and not others).
+  (e.g. the Q3 protein-binding instruction was omitted without being flagged in some development runs).
 - The critic is an LLM: it judges meaning but is not ground truth. Only citation validity is checked by code.
 - Unit/population differences are handled by prompts and the LLM critic; only the presence of numbers and units
   in the cited passages is checked by code.

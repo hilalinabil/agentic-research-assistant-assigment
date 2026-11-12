@@ -18,7 +18,7 @@
   },
   "response": {
     "question": "What is the recommended starting dose of lisinopril for hypertension?",
-    "answer": "The provided documents do not contain information on the recommended starting dose of lisinopril for hypertension.\n\n## Evidence gaps\nNo dedicated lisinopril document or lisinopril dosing information is provided in the corpus.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "answer": "The provided documents do not contain information on the recommended starting dose of lisinopril for hypertension.\n\n### Evidence gaps\nNo dedicated lisinopril document or lisinopril hypertension-dosing information is provided in the corpus.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
     "citations": [],
     "sources": [],
     "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
@@ -32,7 +32,7 @@
       "clinical_ambiguities": [],
       "missing_aspects": [],
       "source_conflicts": [],
-      "feedback": "The answer correctly states that the provided corpus does not contain lisinopril dosing information and appropriately identifies the evidence gap.",
+      "feedback": "The answer appropriately states that the corpus does not provide lisinopril hypertension starting-dose information and does not infer a dose from unrelated drug labels.",
       "overrides": [
         "approved answer has no valid citations: treated as insufficient evidence"
       ]
@@ -55,14 +55,14 @@
         {
           "step": 1,
           "tool": "search_corpus",
-          "arguments": "{\"query\":\"lisinopril recommended starting dose hypertension\",\"top_k\":5}",
+          "arguments": "{\"query\":\"lisinopril hypertension recommended starting dose\"}",
           "ok": true,
-          "summary": "5 passages from dailymed-atorvastatin.md, dailymed-ibuprofen.md, dailymed-sertraline.md"
+          "summary": "5 passages from dailymed-atorvastatin.md, dailymed-sertraline.md"
         }
       ],
       "research_iterations": 2,
       "research_stop_reason": "model_finished",
-      "research_notes": "Covered: The corpus has no dedicated lisinopril document, and the focused search did not provide a lisinopril dosing recommendation. Therefore, the recommended starting dose for hypertension cannot be established from this corpus.",
+      "research_notes": "- **Sub-question 1 (recommended starting dose of lisinopril for hypertension): Not covered.** There is no dedicated lisinopril document in the corpus, and the corpus search did not identify reliable lisinopril dosing information.",
       "evidence": [
         {
           "ref": "dailymed-sertraline.md:L52-L52",
@@ -80,8 +80,8 @@
           "origin": "search_corpus"
         },
         {
-          "ref": "dailymed-ibuprofen.md:L86-L86",
-          "section": "Ibuprofen (DailyMed label) > WARNINGS > Hypertension",
+          "ref": "dailymed-atorvastatin.md:L25-L25",
+          "section": "Atorvastatin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.4 Recommended Dosage in Pediatric Patients 10 Years of Age and Older with HoFH",
           "origin": "search_corpus"
         },
         {
@@ -100,7 +100,7 @@
           "clinical_ambiguities": [],
           "missing_aspects": [],
           "source_conflicts": [],
-          "feedback": "The answer correctly states that the provided corpus does not contain lisinopril dosing information and appropriately identifies the evidence gap.",
+          "feedback": "The answer appropriately states that the corpus does not provide lisinopril hypertension starting-dose information and does not infer a dose from unrelated drug labels.",
           "overrides": [
             "approved answer has no valid citations: treated as insufficient evidence"
           ]
@@ -109,7 +109,7 @@
       "revised": false,
       "invalid_citations": [],
       "removed_citations": [],
-      "elapsed_seconds": 9.11
+      "elapsed_seconds": 8.93
     }
   }
 }

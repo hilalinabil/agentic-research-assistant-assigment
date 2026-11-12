@@ -1,0 +1,245 @@
+{
+  "id": "Q2",
+  "question": "Compare the contraindications of warfarin and apixaban. What conditions are shared and which are unique to each drug?",
+  "expected_sources": [
+    "dailymed-warfarin.md",
+    "dailymed-apixaban.md"
+  ],
+  "public": true,
+  "status": "success",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-warfarin.md": true,
+      "dailymed-apixaban.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 12,
+    "removed_citations": [],
+    "revised": false
+  },
+  "response": {
+    "question": "Compare the contraindications of warfarin and apixaban. What conditions are shared and which are unique to each drug?",
+    "answer": "Warfarin has a broad contraindication list, including pregnancy (with an exception for pregnant women with mechanical heart valves) and multiple bleeding-, procedure-, and patient-related conditions. [dailymed-warfarin.md:L129-L145] Apixaban is contraindicated only for active pathological bleeding and severe hypersensitivity to ELIQUIS. [dailymed-apixaban.md:L108-L113]\n\n## Labeled contraindications\n\n### Warfarin\nWarfarin is contraindicated in pregnancy, except in pregnant women with mechanical heart valves who are at high risk of thromboembolism. [dailymed-warfarin.md:L129-L133]\n\nWarfarin is also contraindicated in patients with:  \n- Hemorrhagic tendencies or blood dyscrasias. [dailymed-warfarin.md:L135-L137]  \n- Recent or contemplated surgery of the central nervous system or eye, or traumatic surgery resulting in large open surfaces. [dailymed-warfarin.md:L135-L138]  \n- Bleeding tendencies associated with active ulceration or overt bleeding of the gastrointestinal, genitourinary, or respiratory tract; central nervous system hemorrhage; cerebral aneurysms; dissecting aorta; pericarditis and pericardial effusions; or bacterial endocarditis. [dailymed-warfarin.md:L135-L139]  \n- Threatened abortion, eclampsia, or preeclampsia. [dailymed-warfarin.md:L135-L140]  \n- Unsupervised status with conditions associated with a potential high level of non-compliance. [dailymed-warfarin.md:L135-L141]  \n- Spinal puncture or other diagnostic or therapeutic procedures with potential for uncontrollable bleeding. [dailymed-warfarin.md:L135-L142]  \n- Hypersensitivity to warfarin or any component of the product, including anaphylaxis. [dailymed-warfarin.md:L135-L143]  \n- Major regional or lumbar block anesthesia. [dailymed-warfarin.md:L135-L144]  \n- Malignant hypertension. [dailymed-warfarin.md:L135-L145]  \n\n### Apixaban\nApixaban is contraindicated in patients with active pathological bleeding. [dailymed-apixaban.md:L108-L113]  \n\nApixaban is contraindicated in patients with a severe hypersensitivity reaction to ELIQUIS, such as anaphylactic reactions. [dailymed-apixaban.md:L108-L113]  \n\n## Shared versus unique contraindications\n\n**Shared:** Both labels contraindicate use in the setting of hypersensitivity, including anaphylaxis. [dailymed-warfarin.md:L135-L143] [dailymed-apixaban.md:L108-L113]  \n\n**Bleeding-related overlap:** Apixaban uses the broad term “active pathological bleeding,” whereas warfarin specifically lists bleeding tendencies associated with active ulceration or overt gastrointestinal, genitourinary, or respiratory tract bleeding, as well as several other bleeding-associated conditions. [dailymed-apixaban.md:L108-L113] [dailymed-warfarin.md:L135-L139]  \n\n**Unique to warfarin’s labeled list:** Pregnancy—with the mechanical-heart-valve exception—hemorrhagic tendencies or blood dyscrasias, specified recent/contemplated or traumatic surgeries, threatened abortion/eclampsia/preeclampsia, high-risk unsupervised non-compliance, spinal puncture or other procedures with potential uncontrollable bleeding, major regional or lumbar block anesthesia, and malignant hypertension are specifically enumerated only in the warfarin contraindications provided. [dailymed-warfarin.md:L129-L145] [dailymed-apixaban.md:L108-L113]  \n\n**Unique wording for apixaban:** “Active pathological bleeding” is specifically listed as an apixaban contraindication, while warfarin instead lists particular bleeding tendencies and bleeding-associated conditions. [dailymed-apixaban.md:L108-L113] [dailymed-warfarin.md:L135-L139]\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 129,
+        "end_line": 145,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-apixaban.md",
+        "start_line": 108,
+        "end_line": 113,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 129,
+        "end_line": 133,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 137,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 138,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 139,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 140,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 141,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 142,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 143,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 144,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 145,
+        "section": "4 CONTRAINDICATIONS"
+      }
+    ],
+    "sources": [
+      "dailymed-apixaban.md",
+      "dailymed-warfarin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "success",
+    "review": {
+      "verdict": "approve",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The answer accurately reproduces both labels’ contraindications and clearly distinguishes the shared hypersensitivity category from the partially overlapping but differently worded bleeding contraindications.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "warfarin",
+          "apixaban"
+        ],
+        "sub_questions": [
+          "What are the labeled contraindications for warfarin?",
+          "What are the labeled contraindications for apixaban?",
+          "Which contraindications are shared by warfarin and apixaban, and which are unique to each drug?"
+        ],
+        "is_compound": true,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "warfarin": [
+          "dailymed-warfarin.md",
+          "medlineplus-warfarin.md"
+        ],
+        "apixaban": [
+          "dailymed-apixaban.md",
+          "medlineplus-apixaban.md"
+        ]
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"warfarin FDA label contraindications 4 CONTRAINDICATIONS\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-warfarin.md"
+        },
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"apixaban FDA label contraindications 4 CONTRAINDICATIONS\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-apixaban.md"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-warfarin.md\",\"section\":\"4 CONTRAINDICATIONS\"}",
+          "ok": true,
+          "summary": "dailymed-warfarin.md L127-L146 (4 CONTRAINDICATIONS)"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-apixaban.md\",\"section\":\"4 CONTRAINDICATIONS\"}",
+          "ok": true,
+          "summary": "dailymed-apixaban.md L108-L114 (4 CONTRAINDICATIONS)"
+        }
+      ],
+      "research_iterations": 3,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Evidence gathered for all sub-questions from the FDA DailyMed labels.\n\n- **Warfarin contraindications:** pregnancy (except certain pregnant patients with mechanical heart valves); hemorrhagic tendencies/blood dyscrasias; specified CNS/eye or traumatic surgery; bleeding-associated conditions (including active ulceration or overt GI/GU/respiratory bleeding, CNS hemorrhage, cerebral aneurysm, dissecting aorta, pericarditis/pericardial effusion, bacterial endocarditis); threatened abortion/eclampsia/preeclampsia; likely nonadherence without supervision; spinal puncture/procedures with uncontrollable-bleeding potential; warfarin/component hypersensitivity; major regional/lumbar block anesthesia; and malignant hypertension. (dailymed-warfarin.md, §4, L127–146)\n\n- **Apixaban contraindications:** active pathological bleeding and severe hypersensitivity to apixaban (e.g., anaphylaxis). (dailymed-apixaban.md, §4, L108–114)\n\n- **Comparison supported:** both labels contraindicate bleeding (apixaban broadly as active pathological bleeding; warfarin through overt active bleeding/bleeding tendencies) and hypersensitivity to the respective drug. The many pregnancy-, procedure/surgery-, disease-, hypertension-, and adherence-related contraindications listed above are unique to warfarin’s label; apixaban’s label has no additional contraindication beyond active pathological bleeding and severe hypersensitivity.",
+      "evidence": [
+        {
+          "ref": "dailymed-warfarin.md:L409-L430",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L428-L445",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L14-L22",
+          "section": "Warfarin (DailyMed label) > 1 INDICATIONS AND USAGE",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L7-L10",
+          "section": "Warfarin (DailyMed label) > WARNING: BLEEDING RISK",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-apixaban.md:L157-L161",
+          "section": "Apixaban (DailyMed label) > 6 ADVERSE REACTIONS",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-apixaban.md:L415-L415",
+          "section": "Apixaban (DailyMed label) > 8 USE IN SPECIFIC POPULATIONS > 8.4 Pediatric Use",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-apixaban.md:L341-L341",
+          "section": "Apixaban (DailyMed label) > 7 DRUG INTERACTIONS",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-apixaban.md:L145-L145",
+          "section": "Apixaban (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.4 Patients with Prosthetic Heart Valves",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L127-L146",
+          "section": "4 CONTRAINDICATIONS",
+          "origin": "read_source_document"
+        },
+        {
+          "ref": "dailymed-apixaban.md:L108-L114",
+          "section": "4 CONTRAINDICATIONS",
+          "origin": "read_source_document"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "approve",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The answer accurately reproduces both labels’ contraindications and clearly distinguishes the shared hypersensitivity category from the partially overlapping but differently worded bleeding contraindications.",
+          "overrides": []
+        }
+      ],
+      "revised": false,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 32.98
+    }
+  }
+}

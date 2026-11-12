@@ -1,10 +1,10 @@
 {
   "meta": {
-    "run_id": "2026-11-12T11-04-16Z",
+    "run_id": "2026-11-12T11-32-54Z",
     "model": "gpt-5.6-terra",
     "embedding_model": "text-embedding-3-small",
-    "code_fingerprint": "512d5d9ab30a5160",
-    "git_head": "8e51c4a (uncommitted changes)",
+    "code_fingerprint": "e53b19be1dd283d5",
+    "git_head": "fef0588 (uncommitted changes)",
     "agent_limits": {
       "max_agent_iterations": 6,
       "max_tool_calls": 12,
@@ -28,11 +28,11 @@
       },
       "all_expected_sources_cited": true,
       "invalid_citations": [],
-      "num_valid_citations": 11,
+      "num_valid_citations": 1,
       "removed_citations": [],
       "revised": false,
-      "tool_calls": 2,
-      "elapsed_seconds": 19.12
+      "tool_calls": 1,
+      "elapsed_seconds": 15.75
     },
     {
       "id": "Q2",
@@ -43,11 +43,11 @@
       },
       "all_expected_sources_cited": true,
       "invalid_citations": [],
-      "num_valid_citations": 18,
+      "num_valid_citations": 12,
       "removed_citations": [],
-      "revised": true,
+      "revised": false,
       "tool_calls": 4,
-      "elapsed_seconds": 40.22
+      "elapsed_seconds": 32.98
     },
     {
       "id": "Q3",
@@ -58,11 +58,11 @@
       },
       "all_expected_sources_cited": true,
       "invalid_citations": [],
-      "num_valid_citations": 6,
+      "num_valid_citations": 7,
       "removed_citations": [],
       "revised": true,
-      "tool_calls": 8,
-      "elapsed_seconds": 30.01
+      "tool_calls": 2,
+      "elapsed_seconds": 30.29
     },
     {
       "id": "Q4",
@@ -72,11 +72,11 @@
       },
       "all_expected_sources_cited": true,
       "invalid_citations": [],
-      "num_valid_citations": 3,
+      "num_valid_citations": 2,
       "removed_citations": [],
       "revised": false,
-      "tool_calls": 1,
-      "elapsed_seconds": 14.54
+      "tool_calls": 3,
+      "elapsed_seconds": 24.15
     },
     {
       "id": "X1",
@@ -90,7 +90,7 @@
       "expected_status_met": true,
       "no_citations": true,
       "tool_calls": 1,
-      "elapsed_seconds": 9.11
+      "elapsed_seconds": 8.93
     }
   ]
 }

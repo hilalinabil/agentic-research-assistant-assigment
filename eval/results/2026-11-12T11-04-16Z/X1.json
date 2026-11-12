@@ -1,0 +1,115 @@
+{
+  "id": "X1",
+  "public": false,
+  "question": "What is the recommended starting dose of lisinopril for hypertension?",
+  "expected_sources": [],
+  "expected_status": "insufficient_evidence",
+  "note": "Control question (not part of the assessment): lisinopril has no document in the corpus.",
+  "status": "insufficient_evidence",
+  "checks": {
+    "expected_sources_cited": {},
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 0,
+    "removed_citations": [],
+    "revised": false,
+    "expected_status_met": true,
+    "no_citations": true
+  },
+  "response": {
+    "question": "What is the recommended starting dose of lisinopril for hypertension?",
+    "answer": "The provided documents do not contain information on the recommended starting dose of lisinopril for hypertension.\n\n## Evidence gaps\nNo dedicated lisinopril document or lisinopril dosing information is provided in the corpus.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [],
+    "sources": [],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "insufficient_evidence",
+    "review": {
+      "verdict": "insufficient_evidence",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The answer correctly states that the provided corpus does not contain lisinopril dosing information and appropriately identifies the evidence gap.",
+      "overrides": [
+        "approved answer has no valid citations: treated as insufficient evidence"
+      ]
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "lisinopril"
+        ],
+        "sub_questions": [
+          "What is the recommended starting dose of lisinopril for hypertension?"
+        ],
+        "is_compound": false,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "lisinopril": []
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"lisinopril recommended starting dose hypertension\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-atorvastatin.md, dailymed-ibuprofen.md, dailymed-sertraline.md"
+        }
+      ],
+      "research_iterations": 2,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Covered: The corpus has no dedicated lisinopril document, and the focused search did not provide a lisinopril dosing recommendation. Therefore, the recommended starting dose for hypertension cannot be established from this corpus.",
+      "evidence": [
+        {
+          "ref": "dailymed-sertraline.md:L52-L52",
+          "section": "Sertraline (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.4 Dosage Modifications in Patients with Hepatic Impairment",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-atorvastatin.md:L17-L17",
+          "section": "Atorvastatin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.2 Recommended Dosage in Adult Patients",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-atorvastatin.md:L21-L21",
+          "section": "Atorvastatin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.3 Recommended Dosage in Pediatric Patients 10 Years of Age and Older with HeFH",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-ibuprofen.md:L86-L86",
+          "section": "Ibuprofen (DailyMed label) > WARNINGS > Hypertension",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L24-L36",
+          "section": "Sertraline (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.1 Dosage in Patients with MDD, OCD, PD, PTSD, and SAD",
+          "origin": "search_corpus"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "insufficient_evidence",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The answer correctly states that the provided corpus does not contain lisinopril dosing information and appropriately identifies the evidence gap.",
+          "overrides": [
+            "approved answer has no valid citations: treated as insufficient evidence"
+          ]
+        }
+      ],
+      "revised": false,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 9.11
+    }
+  }
+}

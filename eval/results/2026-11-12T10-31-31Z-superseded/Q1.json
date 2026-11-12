@@ -1,0 +1,192 @@
+{
+  "id": "Q1",
+  "question": "What are the main contraindications for warfarin?",
+  "expected_sources": [
+    "dailymed-warfarin.md"
+  ],
+  "model": "gpt-5.6-terra",
+  "embedding_model": "text-embedding-3-small",
+  "status": "success",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-warfarin.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 11,
+    "revised": true
+  },
+  "response": {
+    "question": "What are the main contraindications for warfarin?",
+    "answer": "Warfarin is contraindicated in pregnancy, except in pregnant women with mechanical heart valves who are at high risk of thromboembolism. [dailymed-warfarin.md:L129-L133] It is also contraindicated in the specific bleeding-related conditions, procedures, and other circumstances listed in the product label. [dailymed-warfarin.md:L135-L145]\n\n### Main contraindications\n- **Pregnancy**, except in pregnant women with mechanical heart valves who are at high risk of thromboembolism. [dailymed-warfarin.md:L129-L133]\n- **Hemorrhagic tendencies or blood dyscrasias.** [dailymed-warfarin.md:L135-L137]\n- **Recent or contemplated surgery of the central nervous system or eye, or traumatic surgery resulting in large open surfaces.** [dailymed-warfarin.md:L137-L138]\n- **Bleeding tendencies associated with** active ulceration or overt bleeding of the gastrointestinal, genitourinary, or respiratory tract; central nervous system hemorrhage; cerebral aneurysms; dissecting aorta; pericarditis and pericardial effusions; or bacterial endocarditis. [dailymed-warfarin.md:L139-L139]\n- **Threatened abortion, eclampsia, or preeclampsia.** [dailymed-warfarin.md:L140-L140]\n- **Unsupervised patients with conditions associated with potential high level of non-compliance.** [dailymed-warfarin.md:L141-L141]\n- **Spinal puncture and other diagnostic or therapeutic procedures with potential for uncontrollable bleeding.** [dailymed-warfarin.md:L142-L142]\n- **Hypersensitivity to warfarin or any other component of the product**, including anaphylaxis. [dailymed-warfarin.md:L143-L143]\n- **Major regional or lumbar block anesthesia.** [dailymed-warfarin.md:L144-L144]\n- **Malignant hypertension.** [dailymed-warfarin.md:L145-L145]\n\n### Evidence gaps\nThe provided documents do not state that every patient with a generally “high bleeding risk” has a contraindication; the label instead identifies the specific bleeding tendencies, conditions, and procedures above. [dailymed-warfarin.md:L135-L145] The provided documents also do not state that all patients who may have difficulty adhering to treatment are contraindicated; the labeled contraindication is limited to unsupervised patients with conditions associated with potential high level of non-compliance. [dailymed-warfarin.md:L141-L141]\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 129,
+        "end_line": 133,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 145,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 137,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 137,
+        "end_line": 138,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 139,
+        "end_line": 139,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 140,
+        "end_line": 140,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 141,
+        "end_line": 141,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 142,
+        "end_line": 142,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 143,
+        "end_line": 143,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 144,
+        "end_line": 144,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 145,
+        "end_line": 145,
+        "section": "4 CONTRAINDICATIONS"
+      }
+    ],
+    "sources": [
+      "dailymed-warfarin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "success",
+    "review": {
+      "verdict": "approve",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The answer accurately reproduces the label’s contraindications, preserves the pregnancy exception, and appropriately distinguishes the listed contraindications from broader bleeding-risk or adherence concepts.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "warfarin"
+        ],
+        "sub_questions": [
+          "What are the main contraindications for warfarin?"
+        ],
+        "is_compound": false,
+        "fallback": false
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"warfarin FDA label contraindications\"}",
+          "ok": true,
+          "summary": "5 passages from dailymed-warfarin.md"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-warfarin.md\",\"section\":\"4 CONTRAINDICATIONS\"}",
+          "ok": true,
+          "summary": "dailymed-warfarin.md L127-L146 (4 CONTRAINDICATIONS)"
+        }
+      ],
+      "research_iterations": 3,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Covered sub-question 1 using the FDA DailyMed warfarin label, including the complete contraindications section (pregnancy exception for mechanical heart valves; bleeding disorders/active bleeding risks; certain surgery/procedures; hypersensitivity; malignant hypertension; and other listed conditions).",
+      "evidence": [
+        {
+          "ref": "dailymed-warfarin.md:L3-L3",
+          "section": "Warfarin (DailyMed label)",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L409-L430",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L428-L445",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L14-L22",
+          "section": "Warfarin (DailyMed label) > 1 INDICATIONS AND USAGE",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L127-L146",
+          "section": "4 CONTRAINDICATIONS",
+          "origin": "read_source_document"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "revise",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "clinical_ambiguities": [
+            "The opening statement that warfarin is contraindicated \"when there is a high risk of serious or uncontrolled bleeding\" is broader than the label, which specifies particular bleeding tendencies/conditions and procedures rather than establishing a general contraindication for any high bleeding risk.",
+            "The phrase \"patients unable to reliably comply with treatment\" broadens the labeled contraindication, which is specifically \"unsupervised patients with conditions associated with potential high level of non-compliance.\""
+          ],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "Keep the detailed contraindication list, which accurately covers the label. Revise the opening summary to avoid generalizing bleeding risk and nonadherence beyond the label’s specified contraindications.",
+          "overrides": []
+        },
+        {
+          "verdict": "approve",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The answer accurately reproduces the label’s contraindications, preserves the pregnancy exception, and appropriately distinguishes the listed contraindications from broader bleeding-risk or adherence concepts.",
+          "overrides": []
+        }
+      ],
+      "revised": true,
+      "invalid_citations": [],
+      "elapsed_seconds": 22.84
+    }
+  }
+}

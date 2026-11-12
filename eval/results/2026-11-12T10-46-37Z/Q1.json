@@ -1,0 +1,190 @@
+{
+  "id": "Q1",
+  "question": "What are the main contraindications for warfarin?",
+  "expected_sources": [
+    "dailymed-warfarin.md"
+  ],
+  "public": true,
+  "status": "success",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-warfarin.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 11,
+    "removed_citations": [],
+    "revised": false
+  },
+  "response": {
+    "question": "What are the main contraindications for warfarin?",
+    "answer": "Warfarin is contraindicated during pregnancy, except for pregnant women with mechanical heart valves who are at high risk of thromboembolism, and in patients with conditions that confer major bleeding risk or who are hypersensitive to warfarin. [dailymed-warfarin.md:L131-L145]\n\n### Main contraindications\n- **Pregnancy:** Warfarin is contraindicated in women who are pregnant, except pregnant women with mechanical heart valves at high risk of thromboembolism; fetal risks include major congenital malformations, fetal hemorrhage, spontaneous abortion, and fetal mortality. [dailymed-warfarin.md:L131-L133]\n- **Hemorrhagic tendencies or blood dyscrasias.** [dailymed-warfarin.md:L135-L137]\n- **Recent or planned central nervous system or eye surgery, or traumatic surgery resulting in large open surfaces.** [dailymed-warfarin.md:L137-L138]\n- **Bleeding-prone conditions**, including active ulceration or overt gastrointestinal, genitourinary, or respiratory-tract bleeding; central nervous system hemorrhage; cerebral aneurysms; dissecting aorta; pericarditis or pericardial effusions; and bacterial endocarditis. [dailymed-warfarin.md:L139-L139]\n- **Threatened abortion, eclampsia, or preeclampsia.** [dailymed-warfarin.md:L140-L140]\n- **Unsupervised patients with conditions associated with a potential high level of non-compliance.** [dailymed-warfarin.md:L141-L141]\n- **Spinal puncture or other diagnostic or therapeutic procedures with potential for uncontrollable bleeding.** [dailymed-warfarin.md:L142-L142]\n- **Hypersensitivity to warfarin or other product components**, such as anaphylaxis. [dailymed-warfarin.md:L143-L143]\n- **Major regional or lumbar block anesthesia.** [dailymed-warfarin.md:L144-L144]\n- **Malignant hypertension.** [dailymed-warfarin.md:L145-L145]\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 131,
+        "end_line": 145,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 131,
+        "end_line": 133,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 135,
+        "end_line": 137,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 137,
+        "end_line": 138,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 139,
+        "end_line": 139,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 140,
+        "end_line": 140,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 141,
+        "end_line": 141,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 142,
+        "end_line": 142,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 143,
+        "end_line": 143,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 144,
+        "end_line": 144,
+        "section": "4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 145,
+        "end_line": 145,
+        "section": "4 CONTRAINDICATIONS"
+      }
+    ],
+    "sources": [
+      "dailymed-warfarin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "success",
+    "review": {
+      "verdict": "approve",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The draft accurately and completely lists the contraindications in the provided DailyMed label, including the pregnancy exception for patients with mechanical heart valves at high thromboembolic risk.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "warfarin"
+        ],
+        "sub_questions": [
+          "What are the main contraindications for warfarin?"
+        ],
+        "is_compound": false,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "warfarin": [
+          "dailymed-warfarin.md",
+          "medlineplus-warfarin.md"
+        ]
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"warfarin FDA label contraindications\"}",
+          "ok": true,
+          "summary": "5 passages from dailymed-warfarin.md"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-warfarin.md\",\"section\":\"4 CONTRAINDICATIONS\"}",
+          "ok": true,
+          "summary": "dailymed-warfarin.md L127-L146 (4 CONTRAINDICATIONS)"
+        }
+      ],
+      "research_iterations": 3,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Evidence gathered for sub-question 1 (main contraindications for warfarin) from the FDA DailyMed label, section 4:\n\n- Pregnancy, **except** in pregnant patients with mechanical heart valves at high thromboembolic risk.\n- Hemorrhagic tendencies or blood dyscrasias.\n- Recent/planned CNS or eye surgery, or traumatic surgery with large open surfaces.\n- Active ulceration or overt bleeding of the GI, GU, or respiratory tract; CNS hemorrhage; cerebral aneurysm; dissecting aorta; pericarditis/pericardial effusion; or bacterial endocarditis.\n- Threatened abortion, eclampsia, or preeclampsia.\n- Patients unlikely to adhere to monitoring/treatment (unsupervised with high potential for noncompliance).\n- Spinal puncture or other procedures with potential for uncontrollable bleeding.\n- Hypersensitivity to warfarin or its components.\n- Major regional or lumbar block anesthesia.\n- Malignant hypertension.\n\nCoverage: complete for the requested sub-question.",
+      "evidence": [
+        {
+          "ref": "dailymed-warfarin.md:L3-L3",
+          "section": "Warfarin (DailyMed label)",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L409-L430",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L428-L445",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L14-L22",
+          "section": "Warfarin (DailyMed label) > 1 INDICATIONS AND USAGE",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L127-L146",
+          "section": "4 CONTRAINDICATIONS",
+          "origin": "read_source_document"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "approve",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The draft accurately and completely lists the contraindications in the provided DailyMed label, including the pregnancy exception for patients with mechanical heart valves at high thromboembolic risk.",
+          "overrides": []
+        }
+      ],
+      "revised": false,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 14.85
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "Q4",
+  "question": "A patient with an eGFR of 25 mL/min is being considered for metformin. Is metformin contraindicated at this level of renal function, and what is the threshold?",
+  "expected_sources": [
+    "dailymed-metformin.md"
+  ],
+  "public": true,
+  "status": "success",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-metformin.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 5,
+    "removed_citations": [],
+    "revised": false
+  },
+  "response": {
+    "question": "A patient with an eGFR of 25 mL/min is being considered for metformin. Is metformin contraindicated at this level of renal function, and what is the threshold?",
+    "answer": "Assuming the reported eGFR of 25 mL/min corresponds to the label’s body-surface-area-indexed unit (mL/min/1.73 m²), metformin is contraindicated because it is below 30 mL/min/1.73 m²; if a patient is already taking metformin, the label directs discontinuation when eGFR falls below that threshold. [dailymed-metformin.md:L34-L38] The reported unit lacks the label’s “/1.73 m²” indexing, so that assumption is necessary to apply the labeling threshold.\n\n- **FDA DailyMed:** Metformin hydrochloride is contraindicated in severe renal impairment defined as eGFR below 30 mL/min/1.73 m². [dailymed-metformin.md:L46-L50] The label also states that metformin is substantially excreted by the kidney and that the risks of accumulation and metformin-associated lactic acidosis increase as renal impairment becomes more severe. [dailymed-metformin.md:L212-L212]\n- **Threshold and management:** The contraindication/discontinuation threshold is **eGFR below 30 mL/min/1.73 m²**. [dailymed-metformin.md:L34-L38] Initiation is not recommended at eGFR **30 to 45 mL/min/1.73 m²**, and for a treated patient whose eGFR falls below **45 mL/min/1.73 m²**, the label directs assessment of the benefit and risk of continuing therapy. [dailymed-metformin.md:L34-L38]\n- **MedlinePlus:** MedlinePlus advises patients to tell their doctor if they have kidney disease and states that the doctor will probably tell them not to take metformin; it also says kidney-function testing will be performed before and during treatment. [medlineplus-metformin.md:L7-L7] [medlineplus-metformin.md:L17-L17]\n\n### Evidence gaps\n\nThe provided MedlinePlus document does not specify an eGFR number or use the formal term “contraindicated” for kidney disease.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-metformin.md",
+        "start_line": 34,
+        "end_line": 38,
+        "section": "Metformin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.3 Recommendations for Use in Renal Impairment"
+      },
+      {
+        "source": "dailymed-metformin.md",
+        "start_line": 46,
+        "end_line": 50,
+        "section": "Metformin (DailyMed label) > 4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-metformin.md",
+        "start_line": 212,
+        "end_line": 212,
+        "section": "Metformin (DailyMed label) > 8 USE IN SPECIFIC POPULATIONS > 8.6 Renal Impairment"
+      },
+      {
+        "source": "medlineplus-metformin.md",
+        "start_line": 7,
+        "end_line": 7,
+        "section": "Metformin (MedlinePlus)"
+      },
+      {
+        "source": "medlineplus-metformin.md",
+        "start_line": 17,
+        "end_line": 17,
+        "section": "Metformin (MedlinePlus)"
+      }
+    ],
+    "sources": [
+      "dailymed-metformin.md",
+      "medlineplus-metformin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "success",
+    "review": {
+      "verdict": "approve",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The answer accurately applies the DailyMed threshold, clearly notes the indexed eGFR-unit assumption, distinguishes contraindication from initiation/continuation guidance, and correctly describes the more general MedlinePlus kidney-disease advice and its lack of a numeric eGFR threshold.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "metformin"
+        ],
+        "sub_questions": [
+          "What do FDA DailyMed labeling and MedlinePlus state about metformin use in patients with eGFR of 25 mL/min, including whether it is contraindicated?",
+          "What eGFR threshold does metformin labeling specify for contraindication or discontinuation due to renal impairment?"
+        ],
+        "is_compound": false,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "metformin": [
+          "dailymed-metformin.md",
+          "medlineplus-metformin.md"
+        ]
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"metformin DailyMed eGFR below 30 contraindicated discontinue renal impairment\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-metformin.md"
+        },
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"metformin MedlinePlus kidney disease eGFR 30 contraindication\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-metformin.md"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"medlineplus-metformin.md\",\"start_line\":1,\"end_line\":220}",
+          "ok": true,
+          "summary": "medlineplus-metformin.md L1-L89 (Metformin (MedlinePlus))"
+        }
+      ],
+      "research_iterations": 3,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Evidence gathered for both sub-questions:\n\n1. **At eGFR 25 mL/min:** FDA DailyMed labeling states metformin is **contraindicated** when eGFR is **below 30 mL/min/1.73 m²**; if a patient already taking it later falls below that level, it should be **discontinued**. Thus, eGFR 25 is below the contraindication threshold. MedlinePlus states that patients with kidney disease will probably be told not to take metformin and stresses kidney-function testing, but does **not** provide a numeric eGFR cutoff in this corpus document.\n\n2. **Threshold:** DailyMed specifies **eGFR <30 mL/min/1.73 m²** as the threshold for contraindication and discontinuation. It also says initiation at **eGFR 30–45 mL/min/1.73 m²** is not recommended, and to reassess benefits and risks if eGFR falls below 45.\n\nSources: `dailymed-metformin.md` lines 34–38, 46–50, 66–77, 212; `medlineplus-metformin.md` lines 5–25.",
+      "evidence": [
+        {
+          "ref": "dailymed-metformin.md:L34-L38",
+          "section": "Metformin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.3 Recommendations for Use in Renal Impairment",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L212-L212",
+          "section": "Metformin (DailyMed label) > 8 USE IN SPECIFIC POPULATIONS > 8.6 Renal Impairment",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L46-L50",
+          "section": "Metformin (DailyMed label) > 4 CONTRAINDICATIONS",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L42-L42",
+          "section": "Metformin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.4 Discontinuation for Iodinated Contrast Imaging Procedures",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L66-L77",
+          "section": "Metformin (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.1 Lactic Acidosis",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "medlineplus-metformin.md:L1-L89",
+          "section": "Metformin (MedlinePlus)",
+          "origin": "read_source_document"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "approve",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The answer accurately applies the DailyMed threshold, clearly notes the indexed eGFR-unit assumption, distinguishes contraindication from initiation/continuation guidance, and correctly describes the more general MedlinePlus kidney-disease advice and its lack of a numeric eGFR threshold.",
+          "overrides": []
+        }
+      ],
+      "revised": false,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 18.53
+    }
+  }
+}

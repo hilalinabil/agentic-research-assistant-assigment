@@ -1,0 +1,271 @@
+{
+  "id": "Q3",
+  "question": "A patient currently on warfarin is prescribed sertraline. What is the risk of bleeding and what monitoring is recommended?",
+  "expected_sources": [
+    "dailymed-warfarin.md",
+    "dailymed-sertraline.md"
+  ],
+  "public": true,
+  "status": "success",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-warfarin.md": true,
+      "dailymed-sertraline.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 4,
+    "removed_citations": [],
+    "revised": true
+  },
+  "response": {
+    "question": "A patient currently on warfarin is prescribed sertraline. What is the risk of bleeding and what monitoring is recommended?",
+    "answer": "Concomitant sertraline and warfarin increases (or may potentiate) the risk of bleeding; bleeding associated with serotonin-reuptake inhibitors has ranged from ecchymosis, hematoma, epistaxis, and petechiae to life-threatening hemorrhage. [dailymed-sertraline.md:L102-L107] Sertraline is specifically listed among serotonin reuptake inhibitors that increase bleeding risk when used with warfarin. [dailymed-warfarin.md:L251-L260]\n\n### Recommended monitoring\n- Carefully monitor the international normalized ratio (INR) when sertraline is prescribed to a patient taking warfarin. [dailymed-sertraline.md:L102-L107]  \n- Because sertraline is being initiated, warfarin labeling recommends more frequent INR monitoring when other medications are started, stopped, or have dosage changes. [dailymed-warfarin.md:L149-L158]  \n- Warfarin labeling also recommends close monitoring of patients receiving a drug that increases bleeding risk concomitantly with warfarin. [dailymed-warfarin.md:L251-L260]  \n- Patients should be informed of the increased bleeding risk with sertraline plus an anticoagulant and should promptly report unusual bleeding or symptoms, including prolonged bleeding from cuts, increased menstrual flow or vaginal bleeding, nosebleeds, gum bleeding, unusual bleeding or bruising, red or dark-brown urine, red or tar-black stools, headache, dizziness, or weakness. [dailymed-sertraline.md:L102-L107] [dailymed-warfarin.md:L428-L445]  \n- For warfarin generally, patients at high bleeding risk may benefit from more frequent INR monitoring and careful dose adjustment to the desired INR; maintaining INR in the therapeutic range does not eliminate bleeding risk. [dailymed-warfarin.md:L149-L158]  \n\n### Evidence gaps\nThe provided documents do not quantify the absolute or relative bleeding risk specifically for the warfarin–sertraline combination, nor do they specify a particular INR-monitoring schedule specifically for starting sertraline.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-sertraline.md",
+        "start_line": 102,
+        "end_line": 107,
+        "section": "5.3 Increased Risk of Bleeding"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 251,
+        "end_line": 260,
+        "section": "7.3 Drugs that Increase Bleeding Risk"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 149,
+        "end_line": 158,
+        "section": "5.1 Hemorrhage"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 428,
+        "end_line": 445,
+        "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION"
+      }
+    ],
+    "sources": [
+      "dailymed-sertraline.md",
+      "dailymed-warfarin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "success",
+    "review": {
+      "verdict": "approve",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The draft accurately states the increased bleeding risk, recommends careful and more frequent INR monitoring when sertraline is initiated, includes appropriate patient counseling, and appropriately notes that the provided evidence does not quantify the combination-specific risk or provide a sertraline-specific INR schedule.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "warfarin",
+          "sertraline"
+        ],
+        "sub_questions": [
+          "What bleeding risk is associated with concomitant use of warfarin and sertraline?",
+          "What monitoring is recommended when sertraline is prescribed to a patient taking warfarin?"
+        ],
+        "is_compound": true,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "warfarin": [
+          "dailymed-warfarin.md",
+          "medlineplus-warfarin.md"
+        ],
+        "sertraline": [
+          "dailymed-sertraline.md",
+          "medlineplus-sertraline.md"
+        ]
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"sertraline warfarin concomitant bleeding risk monitoring INR DailyMed\",\"top_k\":8}",
+          "ok": true,
+          "summary": "8 passages from dailymed-sertraline.md, dailymed-warfarin.md"
+        },
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"warfarin sertraline SSRI bleeding risk monitor INR DailyMed\",\"top_k\":8}",
+          "ok": true,
+          "summary": "8 passages from dailymed-sertraline.md, dailymed-warfarin.md"
+        },
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"MedlinePlus sertraline warfarin bleeding monitoring\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-sertraline.md, medlineplus-sertraline.md"
+        },
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"MedlinePlus warfarin sertraline bleeding monitoring\",\"top_k\":5}",
+          "ok": true,
+          "summary": "5 passages from dailymed-sertraline.md, dailymed-warfarin.md, medlineplus-warfarin.md"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-sertraline.md\",\"section\":\"5.3 Increased Risk of Bleeding\"}",
+          "ok": true,
+          "summary": "dailymed-sertraline.md L102-L107 (5.3 Increased Risk of Bleeding)"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-sertraline.md\",\"section\":\"7.1 Clinically Significant Drug Interactions\"}",
+          "ok": true,
+          "summary": "dailymed-sertraline.md L322-L359 (7.1 Clinically Significant Drug Interactions)"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-warfarin.md\",\"section\":\"5.1 Hemorrhage\"}",
+          "ok": true,
+          "summary": "dailymed-warfarin.md L149-L158 (5.1 Hemorrhage)"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-warfarin.md\",\"section\":\"7.3 Drugs that Increase Bleeding Risk\"}",
+          "ok": true,
+          "summary": "dailymed-warfarin.md L251-L260 (7.3 Drugs that Increase Bleeding Risk)"
+        },
+        {
+          "step": 2,
+          "tool": "read_source_document",
+          "arguments": "{\"filename\":\"dailymed-warfarin.md\",\"section\":\"2.4 Monitoring to Achieve Optimal Anticoagulation\"}",
+          "ok": true,
+          "summary": "dailymed-warfarin.md L91-L96 (2.4 Monitoring to Achieve Optimal Anticoagulation)"
+        }
+      ],
+      "research_iterations": 3,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Evidence gathered for both sub-questions:\n\n1. **Bleeding risk:** Sertraline (a serotonin reuptake inhibitor) can increase bleeding risk; concurrent warfarin may add to/potentiate that risk. The sertraline label notes bleeding can range from bruising, hematoma, nosebleeds, and petechiae to life-threatening hemorrhage, with an association reported for gastrointestinal bleeding. The warfarin label specifically lists **sertraline** among serotonin reuptake inhibitors that increase bleeding risk when used concomitantly.\n\n2. **Recommended monitoring:** Carefully monitor the **INR** when sertraline is used with warfarin. Warfarin labeling further recommends **more frequent INR monitoring** when another medication is started, stopped, or dose-changed, and close monitoring for patients receiving drugs that increase bleeding risk. Patients should also be counseled to report signs/symptoms of unusual bleeding.\n\nPrimary evidence: DailyMed sertraline sections 5.3 and 7.1; DailyMed warfarin sections 2.4, 5.1, and 7.3.",
+      "evidence": [
+        {
+          "ref": "dailymed-warfarin.md:L7-L10",
+          "section": "Warfarin (DailyMed label) > WARNING: BLEEDING RISK",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L3-L3",
+          "section": "Sertraline (DailyMed label)",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L486-L494",
+          "section": "Sertraline (DailyMed label) > 12 CLINICAL PHARMACOLOGY > 12.2 Pharmacodynamics",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L136-L136",
+          "section": "Sertraline (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.10 QTc Prolongation",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L522-L536",
+          "section": "Sertraline (DailyMed label) > 12 CLINICAL PHARMACOLOGY > 12.3 Pharmacokinetics",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L3-L3",
+          "section": "Warfarin (DailyMed label)",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L428-L445",
+          "section": "Warfarin (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "medlineplus-sertraline.md:L3-L3",
+          "section": "Sertraline (MedlinePlus)",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L288-L318",
+          "section": "Sertraline (DailyMed label) > 6 ADVERSE REACTIONS > 6.2 Post-marketing Experience",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "medlineplus-warfarin.md:L3-L3",
+          "section": "Warfarin (MedlinePlus)",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L102-L107",
+          "section": "5.3 Increased Risk of Bleeding",
+          "origin": "read_source_document"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L322-L359",
+          "section": "7.1 Clinically Significant Drug Interactions",
+          "origin": "read_source_document"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L149-L158",
+          "section": "5.1 Hemorrhage",
+          "origin": "read_source_document"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L251-L260",
+          "section": "7.3 Drugs that Increase Bleeding Risk",
+          "origin": "read_source_document"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L91-L96",
+          "section": "2.4 Monitoring to Achieve Optimal Anticoagulation",
+          "origin": "read_source_document"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "revise",
+          "unsupported_claims": [],
+          "citation_problems": [
+            "claim: The detailed list of bleeding signs and symptoms (including prolonged bleeding from cuts, menstrual/vaginal bleeding, nosebleeds, gum bleeding, urine/stool changes, headache, dizziness, and weakness).; citation: dailymed-warfarin.md:L428-L433; problem: This citation is invalid because the retrieved passage is provided as dailymed-warfarin.md:L428-L445, not the narrowed line range L428-L433. The cited passage does support the listed symptoms if cited using the available range.",
+            "dailymed-warfarin.md:L428-L433: line range is not a retrieved passage range (narrowed lines of a passage that was not shown with line numbers)"
+          ],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "Replace the invalid warfarin counseling citation with the available retrieved range, dailymed-warfarin.md:L428-L445. The remaining risk and INR-monitoring statements are supported.",
+          "overrides": []
+        },
+        {
+          "verdict": "approve",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The draft accurately states the increased bleeding risk, recommends careful and more frequent INR monitoring when sertraline is initiated, includes appropriate patient counseling, and appropriately notes that the provided evidence does not quantify the combination-specific risk or provide a sertraline-specific INR schedule.",
+          "overrides": []
+        }
+      ],
+      "revised": true,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 29.4
+    }
+  }
+}

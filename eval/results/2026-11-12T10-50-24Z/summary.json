@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "run_id": "2026-11-12T10-50-24Z",
+    "model": "gpt-5.6-terra",
+    "embedding_model": "text-embedding-3-small",
+    "code_fingerprint": "54da7d2b704d675f",
+    "git_head": "8e51c4a (uncommitted changes)",
+    "agent_limits": {
+      "max_agent_iterations": 6,
+      "max_tool_calls": 12,
+      "max_search_top_k": 8,
+      "max_evidence_chars": 60000
+    },
+    "questions": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4",
+      "X1"
+    ]
+  },
+  "results": [
+    {
+      "id": "Q1",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-warfarin.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 11,
+      "removed_citations": [],
+      "revised": false,
+      "tool_calls": 2,
+      "elapsed_seconds": 14.62
+    },
+    {
+      "id": "Q2",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-warfarin.md": true,
+        "dailymed-apixaban.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 15,
+      "removed_citations": [],
+      "revised": true,
+      "tool_calls": 4,
+      "elapsed_seconds": 48.02
+    },
+    {
+      "id": "Q3",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-warfarin.md": true,
+        "dailymed-sertraline.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 8,
+      "removed_citations": [],
+      "revised": false,
+      "tool_calls": 7,
+      "elapsed_seconds": 23.96
+    },
+    {
+      "id": "Q4",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-metformin.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 2,
+      "removed_citations": [],
+      "revised": false,
+      "tool_calls": 1,
+      "elapsed_seconds": 13.82
+    },
+    {
+      "id": "X1",
+      "status": "needs_review",
+      "expected_sources_cited": {},
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 0,
+      "removed_citations": [],
+      "revised": true,
+      "expected_status_met": false,
+      "no_citations": true,
+      "tool_calls": 1,
+      "elapsed_seconds": 13.21
+    }
+  ]
+}

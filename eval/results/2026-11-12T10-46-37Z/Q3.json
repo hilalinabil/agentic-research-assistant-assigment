@@ -1,0 +1,268 @@
+{
+  "id": "Q3",
+  "question": "A patient currently on warfarin is prescribed sertraline. What is the risk of bleeding and what monitoring is recommended?",
+  "expected_sources": [
+    "dailymed-warfarin.md",
+    "dailymed-sertraline.md"
+  ],
+  "public": true,
+  "status": "needs_review",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-warfarin.md": true,
+      "dailymed-sertraline.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 9,
+    "removed_citations": [],
+    "revised": true
+  },
+  "response": {
+    "question": "A patient currently on warfarin is prescribed sertraline. What is the risk of bleeding and what monitoring is recommended?",
+    "answer": "Adding sertraline to warfarin heightens bleeding risk. The sertraline label directs careful INR monitoring for patients taking warfarin, while the warfarin label directs more frequent INR monitoring when another drug is started, stopped, or dose-changed and close monitoring when a bleeding-risk drug such as sertraline is used concomitantly. [dailymed-sertraline.md:L104-L106] [dailymed-warfarin.md:L253-L259] [dailymed-warfarin.md:L151-L157]\n\n### Warfarin label\n- Warfarin can cause major or fatal bleeding; its label states that bleeding is more likely within the first month of warfarin therapy. [dailymed-warfarin.md:L151-L157]\n- Sertraline is specifically listed as a serotonin reuptake inhibitor known to increase bleeding risk when used with warfarin, and the warfarin label instructs clinicians to closely monitor patients receiving such drugs with warfarin. [dailymed-warfarin.md:L253-L259]\n- The warfarin label requires regular INR monitoring for all treated patients and specifies more frequent INR monitoring when other drugs are started, stopped, or have dosage changes. [dailymed-warfarin.md:L151-L157]\n- Patient-specific bleeding risk factors include high-intensity anticoagulation (INR >4.0), age greater than or equal to 65, highly variable INRs, gastrointestinal-bleeding history, hypertension, cerebrovascular disease, anemia, malignancy, trauma, renal impairment, certain genetic factors, certain concomitant drugs, and long duration of warfarin therapy. [dailymed-warfarin.md:L151-L157]\n- Patients at high risk of bleeding may benefit from more frequent INR monitoring, careful dose adjustment to the desired INR, and the shortest duration of therapy appropriate for the clinical condition; however, maintaining INR in the therapeutic range does not eliminate bleeding risk. [dailymed-warfarin.md:L151-L157]\n- Warfarin has a narrow therapeutic range. After INR results stabilize in the therapeutic range, INR monitoring is periodic and generally acceptable at intervals of 1 to 4 weeks depending on the clinical situation; additional INR tests are required whenever other medications are initiated, discontinued, or taken irregularly. [dailymed-warfarin.md:L93-L95]\n- Whole-blood clotting and bleeding times are not effective measures for monitoring warfarin therapy. [dailymed-warfarin.md:L93-L95]\n- The label instructs patients about bleeding-risk prevention measures and to report signs and symptoms of bleeding. [dailymed-warfarin.md:L151-L157]\n- The warfarin label also directs clinicians to consult the labels of all concurrently used drugs for interaction and bleeding-adverse-reaction information. [dailymed-warfarin.md:L231-L235]\n\n### Sertraline label\n- Drugs that interfere with serotonin reuptake, including sertraline, increase bleeding-event risk, and concomitant warfarin or other anticoagulants may add to that risk. [dailymed-sertraline.md:L104-L106]\n- The sertraline label states that concurrent use of an anticoagulant with sertraline may potentiate bleeding risk. [dailymed-sertraline.md:L324-L342]\n- Bleeding events reported in association with drugs that interfere with serotonin reuptake range from ecchymosis, hematoma, epistaxis, and petechiae to life-threatening hemorrhages. [dailymed-sertraline.md:L104-L106]\n- Sertraline blocks uptake of serotonin into human platelets at clinically relevant doses. [dailymed-sertraline.md:L486-L494]\n- For patients taking warfarin, the sertraline label specifically directs careful monitoring of the INR. [dailymed-sertraline.md:L104-L106]\n- Patients should be informed that use of sertraline with warfarin has been associated with increased bleeding risk and should tell healthcare providers if they take or plan to take prescription or over-the-counter medicines that increase bleeding risk. [dailymed-sertraline.md:L578-L608]\n- Sertraline is highly bound to plasma protein; when used with another highly protein-bound drug, with warfarin listed as an example, the sertraline label advises monitoring for adverse reactions and reducing the dosage of sertraline or the other protein-bound drug as warranted. [dailymed-sertraline.md:L342-L357]\n\n**Interpretation:** The labels support careful INR monitoring when sertraline is used with warfarin and more frequent INR testing upon sertraline initiation. They do not prescribe a predetermined warfarin dose change solely because sertraline is initiated; warfarin dose adjustment is to maintain the desired INR as clinically indicated, particularly in patients at high bleeding risk. [dailymed-sertraline.md:L104-L106] [dailymed-warfarin.md:L151-L157] [dailymed-warfarin.md:L93-L95]\n\n### Evidence gaps\nThe provided documents do not specify a distinct INR-testing schedule exclusively for starting sertraline, a numeric magnitude of bleeding-risk increase for the sertraline–warfarin combination, or a mandatory pre-emptive warfarin dose reduction.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-sertraline.md",
+        "start_line": 104,
+        "end_line": 106,
+        "section": "Sertraline (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.3 Increased Risk of Bleeding"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 253,
+        "end_line": 259,
+        "section": "Warfarin (DailyMed label) > 7 DRUG INTERACTIONS > 7.3 Drugs that Increase Bleeding Risk"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 151,
+        "end_line": 157,
+        "section": "Warfarin (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.1 Hemorrhage"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 93,
+        "end_line": 95,
+        "section": "Warfarin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.4 Monitoring to Achieve Optimal Anticoagulation"
+      },
+      {
+        "source": "dailymed-warfarin.md",
+        "start_line": 231,
+        "end_line": 235,
+        "section": "Warfarin (DailyMed label) > 7 DRUG INTERACTIONS > 7.1 General Information"
+      },
+      {
+        "source": "dailymed-sertraline.md",
+        "start_line": 324,
+        "end_line": 342,
+        "section": "Sertraline (DailyMed label) > 7 DRUG INTERACTIONS > 7.1 Clinically Significant Drug Interactions"
+      },
+      {
+        "source": "dailymed-sertraline.md",
+        "start_line": 486,
+        "end_line": 494,
+        "section": "Sertraline (DailyMed label) > 12 CLINICAL PHARMACOLOGY > 12.2 Pharmacodynamics"
+      },
+      {
+        "source": "dailymed-sertraline.md",
+        "start_line": 578,
+        "end_line": 608,
+        "section": "Sertraline (DailyMed label) > 17 PATIENT COUNSELING INFORMATION"
+      },
+      {
+        "source": "dailymed-sertraline.md",
+        "start_line": 342,
+        "end_line": 357,
+        "section": "Sertraline (DailyMed label) > 7 DRUG INTERACTIONS > 7.1 Clinically Significant Drug Interactions"
+      }
+    ],
+    "sources": [
+      "dailymed-sertraline.md",
+      "dailymed-warfarin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "needs_review",
+    "review": {
+      "verdict": "revise",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [
+        "The warfarin monitoring section states to determine INR daily after the initial warfarin dose until INR results stabilize in the therapeutic range; the draft gives only the post-stabilization 1-to-4-week interval and omits this instruction. [dailymed-warfarin.md:L93-L95]",
+        "The sertraline bleeding warning notes that case reports and epidemiologic studies have associated serotonin-reuptake-inhibiting drugs with gastrointestinal bleeding. This relevant characterization of the bleeding evidence is omitted. [dailymed-sertraline.md:L104-L106]"
+      ],
+      "source_conflicts": [],
+      "feedback": "Add the warfarin label’s daily INR monitoring instruction during initial therapy until INR stabilization, and optionally summarize the label’s reported association between serotonin-reuptake inhibitors and gastrointestinal bleeding. The remainder is supported and accurately distinguishes label-directed INR monitoring from absence of a specified pre-emptive dose reduction.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "warfarin",
+          "sertraline"
+        ],
+        "sub_questions": [
+          "What does the warfarin label state about bleeding risk and monitoring when warfarin is used with sertraline or other selective serotonin reuptake inhibitors?",
+          "What does the sertraline label state about bleeding risk and monitoring when sertraline is used with warfarin?"
+        ],
+        "is_compound": true,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "warfarin": [
+          "dailymed-warfarin.md",
+          "medlineplus-warfarin.md"
+        ],
+        "sertraline": [
+          "dailymed-sertraline.md",
+          "medlineplus-sertraline.md"
+        ]
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"warfarin label sertraline selective serotonin reuptake inhibitors bleeding monitoring INR\",\"top_k\":6}",
+          "ok": true,
+          "summary": "6 passages from dailymed-sertraline.md, dailymed-warfarin.md"
+        },
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"sertraline label warfarin bleeding monitoring INR anticoagulants\",\"top_k\":6}",
+          "ok": true,
+          "summary": "6 passages from dailymed-sertraline.md, dailymed-warfarin.md"
+        },
+        {
+          "step": 2,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"site dailymed-warfarin selective serotonin reuptake inhibitors sertraline increased bleeding monitor INR drug interactions\",\"top_k\":8}",
+          "ok": true,
+          "summary": "8 passages from dailymed-sertraline.md, dailymed-warfarin.md"
+        }
+      ],
+      "research_iterations": 3,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Evidence gathered for both sub-questions from FDA DailyMed labels.\n\n1. **Warfarin label**\n   - Lists **sertraline** among “serotonin reuptake inhibitors” known to increase bleeding risk when used concomitantly with warfarin (DailyMed warfarin, §7.3, lines 253–259).\n   - States to **closely monitor** patients receiving such drugs with warfarin.\n   - More generally, warfarin can cause major or fatal bleeding; perform **more frequent INR monitoring** when starting, stopping, or changing doses of other drugs (warfarin §5.1, lines 151–157; §7.1, lines 231–235).\n   - INR within the therapeutic range does **not** eliminate bleeding risk.\n\n2. **Sertraline label**\n   - Sertraline/other serotonin-reuptake inhibitors increase bleeding events, and warfarin or other anticoagulants can **add to/potentiate** that risk (DailyMed sertraline §5.3, lines 104–106; §7.1, lines 324–342).\n   - Reported bleeding ranges from bruising/ecchymosis, hematoma, nosebleeds, and petechiae to life-threatening hemorrhage; the label notes an association with gastrointestinal bleeding.\n   - Specifically recommends informing patients about increased bleeding risk and, for patients taking warfarin, **carefully monitoring INR**.",
+      "evidence": [
+        {
+          "ref": "dailymed-sertraline.md:L104-L106",
+          "section": "Sertraline (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.3 Increased Risk of Bleeding",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L324-L342",
+          "section": "Sertraline (DailyMed label) > 7 DRUG INTERACTIONS > 7.1 Clinically Significant Drug Interactions",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L7-L10",
+          "section": "Warfarin (DailyMed label) > WARNING: BLEEDING RISK",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L486-L494",
+          "section": "Sertraline (DailyMed label) > 12 CLINICAL PHARMACOLOGY > 12.2 Pharmacodynamics",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L578-L608",
+          "section": "Sertraline (DailyMed label) > 17 PATIENT COUNSELING INFORMATION",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L151-L157",
+          "section": "Warfarin (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.1 Hemorrhage",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L93-L95",
+          "section": "Warfarin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.4 Monitoring to Achieve Optimal Anticoagulation",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L342-L357",
+          "section": "Sertraline (DailyMed label) > 7 DRUG INTERACTIONS > 7.1 Clinically Significant Drug Interactions",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L118-L118",
+          "section": "Sertraline (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.6 Seizures",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L253-L259",
+          "section": "Warfarin (DailyMed label) > 7 DRUG INTERACTIONS > 7.3 Drugs that Increase Bleeding Risk",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L231-L235",
+          "section": "Warfarin (DailyMed label) > 7 DRUG INTERACTIONS > 7.1 General Information",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-sertraline.md:L536-L552",
+          "section": "Sertraline (DailyMed label) > 12 CLINICAL PHARMACOLOGY > 12.3 Pharmacokinetics",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-warfarin.md:L246-L249",
+          "section": "Warfarin (DailyMed label) > 7 DRUG INTERACTIONS > 7.2 CYP450 Interactions",
+          "origin": "search_corpus"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "revise",
+          "unsupported_claims": [
+            "The final interpretation states that sertraline initiation warrants warfarin dose adjustment “if needed.” The warfarin label supports careful dose adjustment to the desired INR for patients at high bleeding risk, but does not specifically direct warfarin dose adjustment solely because sertraline is initiated; it directs more frequent INR monitoring and adjustment to the desired INR as clinically indicated."
+          ],
+          "citation_problems": [
+            "The citation [dailymed-warfarin.md:L151-L153] is invalid under the automatic citation check. Replace it with the available valid range [dailymed-warfarin.md:L151-L157].",
+            "The citation [dailymed-warfarin.md:L151-L155] is invalid under the automatic citation check. Replace it with the available valid range [dailymed-warfarin.md:L151-L157].",
+            "dailymed-warfarin.md:L151-L153: line range is not a retrieved passage range (narrowed lines of a passage that was not shown with line numbers)",
+            "dailymed-warfarin.md:L151-L155: line range is not a retrieved passage range (narrowed lines of a passage that was not shown with line numbers)"
+          ],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [
+            "“Bleeding is more likely within the first month” should be explicitly identified as a statement from the warfarin label about warfarin therapy, not framed in a way that could be read as the first month after adding sertraline.",
+            "The final recommendation should distinguish the labels’ explicit directions: sertraline labeling says to carefully monitor INR in patients taking warfarin, while warfarin labeling says to perform more frequent INR monitoring when another drug is started, stopped, or dose-changed. It should avoid implying a predetermined dose change or a specific INR schedule not stated for sertraline initiation."
+          ],
+          "missing_aspects": [
+            "The warfarin label states that maintaining INR in the therapeutic range does not eliminate bleeding risk; this relevant qualifier is omitted.",
+            "The warfarin label identifies risk factors for bleeding, including INR >4.0, age 65 years or older, variable INRs, prior gastrointestinal bleeding, hypertension, cerebrovascular disease, anemia, malignancy, trauma, renal impairment, certain genetic factors, concomitant drugs, and longer warfarin duration. At minimum, note that patient-specific bleeding risk factors affect monitoring intensity.",
+            "The warfarin monitoring section states that after INR stabilization, INR is monitored periodically, generally at intervals of 1 to 4 weeks based on the clinical situation, with additional testing when other medications are initiated, discontinued, or taken irregularly. The draft includes additional testing but omits the baseline periodic-monitoring context and interval.",
+            "The warfarin label directs clinicians to consult labeling of all concomitantly used drugs for interaction and bleeding information; this is relevant to the two-label framing of the question.",
+            "The sertraline pharmacodynamics passage states that sertraline blocks serotonin uptake into human platelets at clinically relevant doses. This may be included as label-supported mechanistic context, although it is not necessary to answer the monitoring recommendation."
+          ],
+          "source_conflicts": [],
+          "feedback": "Correct the two invalid warfarin citations. Keep the central conclusion—heightened bleeding risk, careful INR monitoring, and more frequent INR testing when sertraline is initiated—but avoid presenting warfarin dose adjustment as an automatic sertraline-initiation instruction. Clarify that therapeutic INR does not eliminate bleeding risk and, if adding detail, include the warfarin label’s patient-specific risk factors and periodic INR-monitoring context.",
+          "overrides": []
+        },
+        {
+          "verdict": "revise",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [
+            "The warfarin monitoring section states to determine INR daily after the initial warfarin dose until INR results stabilize in the therapeutic range; the draft gives only the post-stabilization 1-to-4-week interval and omits this instruction. [dailymed-warfarin.md:L93-L95]",
+            "The sertraline bleeding warning notes that case reports and epidemiologic studies have associated serotonin-reuptake-inhibiting drugs with gastrointestinal bleeding. This relevant characterization of the bleeding evidence is omitted. [dailymed-sertraline.md:L104-L106]"
+          ],
+          "source_conflicts": [],
+          "feedback": "Add the warfarin label’s daily INR monitoring instruction during initial therapy until INR stabilization, and optionally summarize the label’s reported association between serotonin-reuptake inhibitors and gastrointestinal bleeding. The remainder is supported and accurately distinguishes label-directed INR monitoring from absence of a specified pre-emptive dose reduction.",
+          "overrides": []
+        }
+      ],
+      "revised": true,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 56.58
+    }
+  }
+}

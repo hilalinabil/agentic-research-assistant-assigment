@@ -1,0 +1,135 @@
+{
+  "id": "Q4",
+  "question": "A patient with an eGFR of 25 mL/min is being considered for metformin. Is metformin contraindicated at this level of renal function, and what is the threshold?",
+  "expected_sources": [
+    "dailymed-metformin.md"
+  ],
+  "public": true,
+  "status": "success",
+  "checks": {
+    "expected_sources_cited": {
+      "dailymed-metformin.md": true
+    },
+    "all_expected_sources_cited": true,
+    "invalid_citations": [],
+    "num_valid_citations": 3,
+    "removed_citations": [],
+    "revised": false
+  },
+  "response": {
+    "question": "A patient with an eGFR of 25 mL/min is being considered for metformin. Is metformin contraindicated at this level of renal function, and what is the threshold?",
+    "answer": "Yes—assuming the reported eGFR of 25 mL/min is expressed as mL/min/1.73 m², metformin is contraindicated because it is below the labeling threshold of 30 mL/min/1.73 m². [dailymed-metformin.md:L34-L38]  \n\n- The metformin label contraindicates metformin in severe renal impairment, defined as an eGFR below 30 mL/min/1.73 m². [dailymed-metformin.md:L46-L50]  \n- The label directs clinicians to assess renal function before starting metformin and periodically thereafter, and to discontinue metformin if a patient’s eGFR later falls below 30 mL/min/1.73 m². [dailymed-metformin.md:L34-L38]  \n- The label also states that metformin accumulation and metformin-associated lactic acidosis risk increase as renal impairment becomes more severe. [dailymed-metformin.md:L66-L77]  \n\n### Evidence gaps\nThe question gives eGFR as “25 mL/min,” whereas the label’s threshold is indexed to body surface area (“mL/min/1.73 m²”); the conclusion above assumes the reported value is intended to be indexed in the same way.\n\n*This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.*",
+    "citations": [
+      {
+        "source": "dailymed-metformin.md",
+        "start_line": 34,
+        "end_line": 38,
+        "section": "Metformin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.3 Recommendations for Use in Renal Impairment"
+      },
+      {
+        "source": "dailymed-metformin.md",
+        "start_line": 46,
+        "end_line": 50,
+        "section": "Metformin (DailyMed label) > 4 CONTRAINDICATIONS"
+      },
+      {
+        "source": "dailymed-metformin.md",
+        "start_line": 66,
+        "end_line": 77,
+        "section": "Metformin (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.1 Lactic Acidosis"
+      }
+    ],
+    "sources": [
+      "dailymed-metformin.md"
+    ],
+    "disclaimer": "This information is provided for research and educational purposes only. It is not medical advice and should not replace consultation with a qualified healthcare professional.",
+    "status": "success",
+    "review": {
+      "verdict": "approve",
+      "unsupported_claims": [],
+      "citation_problems": [],
+      "irrelevant_citations": [],
+      "number_problems": [],
+      "clinical_ambiguities": [],
+      "missing_aspects": [],
+      "source_conflicts": [],
+      "feedback": "The answer accurately states that the label contraindicates metformin below an eGFR of 30 mL/min/1.73 m² and appropriately notes the indexing-unit qualification for the reported value.",
+      "overrides": []
+    },
+    "trace": {
+      "plan": {
+        "drugs": [
+          "metformin"
+        ],
+        "sub_questions": [
+          "What does the metformin labeling state about contraindication based on eGFR, including the specific eGFR threshold?"
+        ],
+        "is_compound": false,
+        "fallback": false
+      },
+      "corpus_coverage": {
+        "metformin": [
+          "dailymed-metformin.md",
+          "medlineplus-metformin.md"
+        ]
+      },
+      "tool_calls": [
+        {
+          "step": 1,
+          "tool": "search_corpus",
+          "arguments": "{\"query\":\"metformin prescribing information contraindicated eGFR below 30 mL/min/1.73 m2 renal impairment\"}",
+          "ok": true,
+          "summary": "5 passages from dailymed-metformin.md"
+        }
+      ],
+      "research_iterations": 2,
+      "research_stop_reason": "model_finished",
+      "research_notes": "Evidence gathered for sub-question 1:\n\n- **DailyMed metformin label, Dosage and Administration §2.3 (lines 34–38):** Metformin is **contraindicated when eGFR is below 30 mL/min/1.73 m²**. It also states not to initiate therapy at eGFR 30–45 mL/min/1.73 m² and to discontinue it if eGFR falls below 30.\n- **DailyMed metformin label, Contraindications §4 (lines 46–50):** Severe renal impairment, defined as **eGFR below 30 mL/min/1.73 m²**, is a contraindication.\n- **DailyMed metformin label, Renal Impairment §8.6 (line 212):** Confirms the same threshold and notes increased accumulation/lactic-acidosis risk with renal impairment.\n\nAll planned sub-questions are covered.",
+      "evidence": [
+        {
+          "ref": "dailymed-metformin.md:L212-L212",
+          "section": "Metformin (DailyMed label) > 8 USE IN SPECIFIC POPULATIONS > 8.6 Renal Impairment",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L34-L38",
+          "section": "Metformin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.3 Recommendations for Use in Renal Impairment",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L46-L50",
+          "section": "Metformin (DailyMed label) > 4 CONTRAINDICATIONS",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L66-L77",
+          "section": "Metformin (DailyMed label) > 5 WARNINGS AND PRECAUTIONS > 5.1 Lactic Acidosis",
+          "origin": "search_corpus"
+        },
+        {
+          "ref": "dailymed-metformin.md:L42-L42",
+          "section": "Metformin (DailyMed label) > 2 DOSAGE AND ADMINISTRATION > 2.4 Discontinuation for Iodinated Contrast Imaging Procedures",
+          "origin": "search_corpus"
+        }
+      ],
+      "reviews": [
+        {
+          "verdict": "approve",
+          "unsupported_claims": [],
+          "citation_problems": [],
+          "irrelevant_citations": [],
+          "number_problems": [],
+          "clinical_ambiguities": [],
+          "missing_aspects": [],
+          "source_conflicts": [],
+          "feedback": "The answer accurately states that the label contraindicates metformin below an eGFR of 30 mL/min/1.73 m² and appropriately notes the indexing-unit qualification for the reported value.",
+          "overrides": []
+        }
+      ],
+      "revised": false,
+      "invalid_citations": [],
+      "removed_citations": [],
+      "elapsed_seconds": 14.54
+    }
+  }
+}

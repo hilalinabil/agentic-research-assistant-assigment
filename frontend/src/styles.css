@@ -1,0 +1,64 @@
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1d2330;
+  --muted: #5d6676;
+  --border: #dde1e7;
+  --accent: #1f5fbf;
+  --ok: #1d7a46;
+  --warn: #9a6200;
+  --bad: #b3261e;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+body { margin: 0; }
+.page { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { margin: 0 0 4px; font-size: 1.6rem; }
+h2 { font-size: 1.05rem; margin: 24px 0 8px; }
+.sub, .muted, .hint { color: var(--muted); }
+.sub { margin: 0 0 24px; }
+
+.ask { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.ask label { font-weight: 600; display: block; margin-bottom: 6px; }
+textarea {
+  width: 100%; box-sizing: border-box; font: inherit; padding: 10px; border: 1px solid var(--border);
+  border-radius: 8px; resize: vertical;
+}
+.row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+button[type="submit"] {
+  background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 9px 22px;
+  font: inherit; font-weight: 600; cursor: pointer;
+}
+button:disabled { opacity: 0.55; cursor: default; }
+.hint { font-size: 0.85rem; }
+.examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; align-items: center; font-size: 0.85rem; }
+.chip {
+  background: #eef2f8; border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px;
+  font: inherit; cursor: pointer; color: var(--text);
+}
+
+.loading { color: var(--muted); font-style: italic; }
+.error { margin-top: 16px; padding: 12px; border-radius: 8px; background: #fdecea; color: var(--bad); }
+
+.result { margin-top: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+.status { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-bottom: 8px; }
+.status.success { background: #e3f4ea; color: var(--ok); }
+.status.needs_review, .status.insufficient_evidence { background: #fff3dc; color: var(--warn); }
+.answer h3 { font-size: 1rem; margin: 16px 0 6px; }
+.answer p { margin: 8px 0; }
+.cite {
+  font-size: 0.75rem; background: #eef2f8; color: var(--accent); padding: 1px 6px; border-radius: 4px;
+  white-space: nowrap;
+}
+.disclaimer { margin-top: 16px; padding: 10px 12px; background: #fff8e6; border-left: 4px solid var(--warn); border-radius: 4px; font-size: 0.9rem; }
+.citations { padding-left: 20px; }
+.citations li { margin: 3px 0; }
+code { font-size: 0.85em; background: #f0f2f5; padding: 1px 4px; border-radius: 4px; }
+.trace { margin-top: 20px; font-size: 0.88rem; }
+.trace summary { cursor: pointer; color: var(--accent); }
+.trace h3 { font-size: 0.92rem; margin: 12px 0 4px; }
+.trace .args { word-break: break-all; }
+.trace li.bad { color: var(--bad); }

@@ -1,0 +1,13 @@
+# Runtime dependencies (pinned). Test-only tools are in requirements-dev.txt.
+
+# API and validation
+fastapi==0.162.4
+uvicorn==0.54.0
+pydantic==2.14.3
+python-dotenv==1.2.4
+
+# LLM client, tokenization, numerical processing
+openai==3.49.0
+tiktoken==0.14.0
+numpy==2.5.4
+httpx==0.28.1

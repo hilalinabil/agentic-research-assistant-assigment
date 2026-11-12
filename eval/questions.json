@@ -1,0 +1,44 @@
+[
+  {
+    "id": "Q1",
+    "question": "What are the main contraindications for warfarin?",
+    "expected_sources": [
+      "dailymed-warfarin.md"
+    ],
+    "public": true
+  },
+  {
+    "id": "Q2",
+    "question": "Compare the contraindications of warfarin and apixaban. What conditions are shared and which are unique to each drug?",
+    "expected_sources": [
+      "dailymed-warfarin.md",
+      "dailymed-apixaban.md"
+    ],
+    "public": true
+  },
+  {
+    "id": "Q3",
+    "question": "A patient currently on warfarin is prescribed sertraline. What is the risk of bleeding and what monitoring is recommended?",
+    "expected_sources": [
+      "dailymed-warfarin.md",
+      "dailymed-sertraline.md"
+    ],
+    "public": true
+  },
+  {
+    "id": "Q4",
+    "question": "A patient with an eGFR of 25 mL/min is being considered for metformin. Is metformin contraindicated at this level of renal function, and what is the threshold?",
+    "expected_sources": [
+      "dailymed-metformin.md"
+    ],
+    "public": true
+  },
+  {
+    "id": "X1",
+    "public": false,
+    "question": "What is the recommended starting dose of lisinopril for hypertension?",
+    "expected_sources": [],
+    "expected_status": "insufficient_evidence",
+    "note": "Control question (not part of the assessment): lisinopril has no document in the corpus."
+  }
+]

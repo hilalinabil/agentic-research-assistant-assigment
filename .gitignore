@@ -14,7 +14,7 @@ venv/
 # IDE
 .vscode/
 .idea/
-
+.claude/
 # OS
 .DS_Store
 
@@ -24,3 +24,13 @@ build/
 
 # Logs
 *.log
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Local evaluation scratch / caches
+*.pkl
+
+# local documents 
+docs/t
+CLAUDE.md

@@ -1,0 +1,61 @@
+{
+  "run_at": "2026-11-12T10:31:31+00:00",
+  "model": "gpt-5.6-terra",
+  "embedding_model": "text-embedding-3-small",
+  "results": [
+    {
+      "id": "Q1",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-warfarin.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 11,
+      "revised": true,
+      "tool_calls": 2,
+      "elapsed_seconds": 22.84
+    },
+    {
+      "id": "Q2",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-warfarin.md": true,
+        "dailymed-apixaban.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 16,
+      "revised": true,
+      "tool_calls": 4,
+      "elapsed_seconds": 43.52
+    },
+    {
+      "id": "Q3",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-warfarin.md": true,
+        "dailymed-sertraline.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 10,
+      "revised": false,
+      "tool_calls": 7,
+      "elapsed_seconds": 22.12
+    },
+    {
+      "id": "Q4",
+      "status": "success",
+      "expected_sources_cited": {
+        "dailymed-metformin.md": true
+      },
+      "all_expected_sources_cited": true,
+      "invalid_citations": [],
+      "num_valid_citations": 2,
+      "revised": false,
+      "tool_calls": 1,
+      "elapsed_seconds": 10.14
+    }
+  ]
+}

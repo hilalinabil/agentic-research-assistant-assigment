@@ -2,12 +2,15 @@
 
 Route handlers only translate HTTP <-> agent calls; all logic lives in
 ``app.agent``. The corpus index is built in a background thread at startup so
-the server (and /health) is reachable immediately; /ask waits for the index.
+the server (and /health) is reachable immediately. A failed build is retried
+with exponential backoff; if it still failed, the next /ask triggers one more
+build attempt before answering 503.
 """
 from __future__ import annotations
 
 import logging
 import threading
+import time
 from contextlib import asynccontextmanager
 from typing import Optional
 
@@ -30,29 +33,70 @@ logger = logging.getLogger("app")
 INDEX_WAIT_SECONDS = 180
 
 
+def create_agent() -> ResearchAgent:
+    """Build the corpus index (embedding calls) and the agent."""
+    client = get_openai_client(settings)
+    embedder = Embedder(client, settings.openai_embedding_model, settings.embedding_batch_size)
+    return ResearchAgent(client, settings, build_index(settings, embedder))
+
+
 class AgentState:
-    """Holds the agent once the index is built (or the startup error)."""
+    """Builds the agent in a background thread, with retries, and reports progress."""
 
-    def __init__(self) -> None:
-        self.ready = threading.Event()
+    def __init__(self, max_attempts: Optional[int] = None, base_delay: Optional[float] = None) -> None:
+        self.max_attempts = max_attempts or settings.index_build_attempts
+        self.base_delay = settings.index_retry_base_seconds if base_delay is None else base_delay
         self.agent: Optional[ResearchAgent] = None
-        self.error: str = ""
+        self.status = "building"   # building | ready | failed
+        self.error = ""
+        self.attempts = 0
+        self._lock = threading.Lock()
+        self._thread: Optional[threading.Thread] = None
 
-    def build(self) -> None:
-        try:
-            client = get_openai_client(settings)
-            embedder = Embedder(client, settings.openai_embedding_model, settings.embedding_batch_size)
-            index = build_index(settings, embedder)
-            self.agent = ResearchAgent(client, settings, index)
-        except ValueError as exc:  # our own configuration validation: message names the missing variables only
-            logger.error("Startup failed: %s", exc)
-            self.error = str(exc)
-        except Exception as exc:  # report through /health and /ask instead of crashing the server
-            # Provider errors can contain account details; clients only get the error type.
-            logger.exception("Startup failed")
-            self.error = f"index build failed ({type(exc).__name__}); see server logs"
-        finally:
-            self.ready.set()
+    def start(self, max_attempts: Optional[int] = None) -> Optional[threading.Thread]:
+        """Start a build round unless the agent exists or a build is already running."""
+        with self._lock:
+            if self.agent is not None:
+                return None
+            if self._thread is not None and self._thread.is_alive():
+                return self._thread
+            self.status = "building"
+            self._thread = threading.Thread(target=self._run, args=(max_attempts or self.max_attempts,),
+                                            name="index-builder", daemon=True)
+            self._thread.start()
+            return self._thread
+
+    def _run(self, attempts: int) -> None:
+        missing = settings.missing_api_config()
+        if missing:  # retrying cannot fix missing configuration
+            self.error = f"Missing required environment variables: {', '.join(missing)}"
+            logger.error("Startup failed: %s", self.error)
+            self.status = "failed"
+            return
+        for attempt in range(1, attempts + 1):
+            self.attempts += 1
+            try:
+                self.agent = create_agent()
+                self.error, self.status = "", "ready"
+                return
+            except Exception as exc:
+                # Provider errors can contain account details; clients only get the error type.
+                logger.exception("Index build attempt %d/%d failed", attempt, attempts)
+                self.error = f"index build failed ({type(exc).__name__}); see server logs"
+            if attempt < attempts:
+                delay = self.base_delay * 2 ** (attempt - 1)
+                logger.warning("Retrying index build in %.0fs", delay)
+                time.sleep(delay)
+        self.status = "failed"
+
+    def ensure_ready(self, timeout: float) -> bool:
+        """Wait for a running build; if the last build round failed, try once more now."""
+        if self.agent is not None:
+            return True
+        thread = self.start(max_attempts=1) if self.status == "failed" else self._thread
+        if thread is not None:
+            thread.join(timeout)
+        return self.agent is not None
 
 
 state = AgentState()
@@ -60,7 +104,7 @@ state = AgentState()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    threading.Thread(target=state.build, name="index-builder", daemon=True).start()
+    state.start()
     yield
 
 
@@ -71,15 +115,15 @@ app = FastAPI(title="Agentic Pharmacology Research Assistant", version="1.0.0", 
 def health() -> HealthResponse:
     agent = state.agent
     if agent:
-        return HealthResponse(status="ok", index_ready=True, documents=len(agent.index.documents),
-                              chunks=len(agent.index.chunks))
-    detail = state.error or "index is being built"
-    return HealthResponse(status="ok", index_ready=False, detail=detail)
+        return HealthResponse(status="ok", index_ready=True, index_status="ready", build_attempts=state.attempts,
+                              documents=len(agent.index.documents), chunks=len(agent.index.chunks))
+    return HealthResponse(status="ok", index_ready=False, index_status=state.status, build_attempts=state.attempts,
+                          detail=state.error or "index is being built")
 
 
 @app.post("/ask", response_model=AskResponse)
 def ask(request: AskRequest) -> AskResponse:
-    if not state.ready.wait(timeout=INDEX_WAIT_SECONDS) or state.agent is None:
+    if not state.ensure_ready(timeout=INDEX_WAIT_SECONDS):
         raise HTTPException(status_code=503, detail=f"Service not ready: {state.error or 'index still building'}")
     try:
         return state.agent.run(request.question)

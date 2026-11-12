@@ -40,6 +40,8 @@ class AskResponse(BaseModel):
 class HealthResponse(BaseModel):
     status: Literal["ok"]
     index_ready: bool
+    index_status: Literal["building", "ready", "failed"] = "building"
+    build_attempts: int = 0
     documents: int = 0
     chunks: int = 0
     detail: str = ""

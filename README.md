@@ -83,7 +83,7 @@ Diagrams and design rationale: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ```bash
 curl http://localhost:8000/health
-# {"status":"ok","index_ready":true,"documents":21,"chunks":525,"detail":""}
+# {"status":"ok","index_ready":true,"index_status":"ready","build_attempts":1,"documents":21,"chunks":525,"detail":""}
 
 curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" \
      -d '{"question": "What are the main contraindications for warfarin?"}'
@@ -103,7 +103,10 @@ curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" \
 
 Errors: `422` invalid question (3–2000 characters) · `503` index not ready/misconfigured · `502` LLM provider
 error · `500` unexpected. Error bodies never contain provider messages or stack traces (those go to the server log).
-`/health` always returns `200` with `index_ready`. Interactive docs at `/docs`. No CORS headers are sent: the UI is
+`/health` always returns `200` with `index_ready`, `index_status` (`building | ready | failed`) and `build_attempts`.
+If the startup index build fails (e.g. provider unreachable), it is retried in the background with exponential
+backoff (5 attempts: 2, 4, 8, 16 s); if it still failed, the next `/ask` makes one more attempt before answering `503`.
+Missing configuration is reported immediately and not retried. Interactive docs at `/docs`. No CORS headers are sent: the UI is
 served from the same origin, so other web origins cannot call the API from a browser.
 
 ## Configuration
@@ -117,6 +120,12 @@ Copy `.env.example` to `.env`:
 | `OPENAI_BASE_URL` | no | OpenAI-compatible proxy URL; empty = SDK default |
 | `OPENAI_EMBEDDING_MODEL` | no | Default `text-embedding-3-small` |
 | `LLM_TIMEOUT_SECONDS`, `MAX_AGENT_ITERATIONS` | no | Defaults 90 and 6 |
+| `INDEX_BUILD_ATTEMPTS`, `INDEX_RETRY_BASE_SECONDS` | no | Startup index build retries; defaults 5 and 2 |
+
+Model portability: chat requests send only `model`, `messages` and (for research) `tools` — no temperature, token
+limits, `tool_choice`, `response_format` or reasoning parameters — and JSON outputs are parsed from text. If a
+provider rejects the tool-calling request (HTTP 400), the agent falls back to one corpus search per planned
+sub-question (recorded in the trace) instead of failing.
 
 Variables already in the environment (e.g. `docker run --env-file`) take precedence over a local `.env`.
 
@@ -134,7 +143,8 @@ is downloaded at build time; `.env`, tests and local files are excluded by `.doc
 ## Run locally
 
 ```bash
-git clone <repository-url> pharma-research-agent && cd pharma-research-agent
+# TODO(author): replace with the public GitLab URL before submission
+git clone https://gitlab.com/TODO/pharma-research-agent.git && cd pharma-research-agent
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 cp .env.example .env            # fill in values
@@ -169,12 +179,12 @@ python -m eval.run_eval --report [RUN]  # re-render a run's RESULTS.md from its 
   out-of-corpus control (X1, lisinopril) expected to return `insufficient_evidence` without citations.
 - `eval/results/<run_id>/` — complete response per question, `summary.json` (models, limits, git HEAD, code+corpus
   fingerprint) and `RESULTS.md`. Runs are never overwritten; `latest.txt` names the reported run;
-  `eval/results/README.md` explains every run.
+  `eval/results/README.md` documents the reported run.
 - `eval/MANUAL_REVIEW.md` — human check of the reported run against the cited source lines.
 
 Automatic checks are deterministic (expected sources cited, citation validity, status). There is no LLM-as-judge score.
 
-Reported run `2026-11-12T11-04-16Z` (gpt-5.6-terra, same code as this tree): Q1–Q4 `success`, all expected
+Reported run `2026-11-12T11-04-16Z` (gpt-5.6-terra; later code changes listed in `eval/results/README.md`): Q1–Q4 `success`, all expected
 sources cited, 0 invalid citations, 15–40 s per question; X1 `insufficient_evidence` with no citations. Known
 weakness in that run: Q3 omits the sertraline protein-binding instruction (see the manual review).
 
@@ -194,7 +204,8 @@ weakness in that run: Q3 omits the sertraline protein-binding instruction (see t
 ## AI coding configuration
 
 This project was built with Claude Code. Its configuration is committed: [`CLAUDE.md`](CLAUDE.md) (project
-instructions and conventions) and [`.claude/`](.claude) (shared permission settings and a `verify` skill). No MCP
+instructions and conventions) and [`.claude/`](.claude) (shared permission settings and a `verify` skill). The master prompt and all follow-up instructions are in
+[`docs/ai-assistance/`](docs/ai-assistance). No MCP
 servers were used. See the presentation outline in [`docs/PRESENTATION.md`](docs/PRESENTATION.md).
 
 ## Repository layout

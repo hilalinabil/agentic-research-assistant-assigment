@@ -48,6 +48,10 @@ class Settings(BaseModel):
     max_search_top_k: int = Field(default=8)
     max_evidence_chars: int = Field(default=60_000)
 
+    # --- Startup index build --------------------------------------------------
+    index_build_attempts: int = Field(default_factory=lambda: int(_env("INDEX_BUILD_ATTEMPTS", "5")))
+    index_retry_base_seconds: float = Field(default_factory=lambda: float(_env("INDEX_RETRY_BASE_SECONDS", "2")))
+
     # --- Frontend -----------------------------------------------------------------
     frontend_dist_dir: Path = Field(default_factory=lambda: BASE_DIR / "frontend" / "dist")
 

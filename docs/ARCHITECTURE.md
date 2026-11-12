@@ -85,7 +85,8 @@ sequenceDiagram
 | Exact reads shown with per-line numbers | Lets the model cite precise lines that the validator can verify; guessed line numbers inside unnumbered chunks are rejected. |
 | Max one revision | Bounded cost/latency; unresolved problems are shown to the user (`status: needs_review`) instead of looping. |
 | No provider-specific JSON mode, no temperature | Works with any OpenAI-compatible model; JSON is parsed tolerantly. |
-| Index built in a background thread | `/health` is 200 immediately; `/ask` waits (up to 180 s) for the index rather than failing. |
+| Index built in a background thread, retried with backoff | `/health` is 200 immediately and reports build status; failed builds retry (5 attempts, exponential backoff) and `/ask` triggers one more attempt before returning 503. |
+| Only `model`, `messages`, `tools` sent to the chat API | Works with any tool-capable OpenAI-compatible model; a 400 on the tool request falls back to plain retrieval instead of failing. |
 
 ## Safety properties
 

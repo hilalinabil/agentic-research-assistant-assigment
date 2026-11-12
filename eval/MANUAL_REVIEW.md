@@ -1,8 +1,7 @@
 # Manual review of the reported evaluation run
 
 Reported run: [`results/2026-11-12T11-04-16Z/`](results/2026-11-12T11-04-16Z/RESULTS.md) — chat model `gpt-5.6-terra`,
-embeddings `text-embedding-3-small`, code+corpus fingerprint `512d5d9ab30a5160` (identical to the submitted tree).
-Other runs and why they exist: [`results/README.md`](results/README.md).
+embeddings `text-embedding-3-small`, code+corpus fingerprint `512d5d9ab30a5160` (code changed slightly afterwards; see [`results/README.md`](results/README.md)).
 
 Method: each answer was read next to the cited lines of the source files; narrowed citations (≤2 lines) were also
 checked mechanically against the cited source text. No numeric score is given; an LLM judge would not be ground truth.
@@ -41,7 +40,7 @@ checked mechanically against the cited source text. No numeric score is given; a
   the validator rejected it and the revision cited the retrieved passage range.
 - **Omission:** the sertraline protein-binding interaction ("monitor for adverse reactions and reduce the dosage of
   sertraline or the other protein-bound drug as warranted", warfarin as example; sertraline §7.1) was in the evidence
-  but is not in the answer, and the critic did not request it. The previous run (`2026-11-12T10-56-00Z`) included it.
+  but is not in the answer, and the critic did not request it. An earlier development run included it.
 - Minor: the opening sentence applies the warfarin label's general "other drugs started/stopped" monitoring rule to
   sertraline; it cites both labels but is not marked "Interpretation:".
 
@@ -61,12 +60,12 @@ checked mechanically against the cited source text. No numeric score is given; a
 | Out-of-corpus answer cited atorvastatin/sertraline passages | Generator cited passages to show "what the corpus contains"; nothing stopped citations that support no relevant claim | Generator rule (cite only supporting passages; no citations on gap statements); critic field `irrelevant_citations`, removed from the answer by code; corpus-coverage note per planned drug; an approved answer with no valid citations is treated as `insufficient_evidence` |
 | Q3 omitted the sertraline protein-binding instruction | The passage **was** in the generator's context (sertraline §7.1 L322–L359, 23.6k chars total, no truncation); the generator left it out and the critic did not ask for it | Generator rule to include management instructions for the drugs/situation asked; critic checks passages one by one for omissions that change or qualify the answer |
 | Q4 compared "25 mL/min" with "30 mL/min/1.73 m²" without comment | Evidence units were passed correctly; nothing required reconciling question units with label units | Generator rule to state unit/population differences and assumptions; critic instructed to flag them; deterministic `check_numbers` flags numbers/units not present in the cited passages |
-| Reported "Q3 revised" vs table "not revised" | Two different runs: the first (overwritten) run revised Q3, the second did not | Run directories that are never overwritten; reported run named explicitly |
+| Reported "Q3 revised" vs table "not revised" | Two different runs: the first (overwritten) run revised Q3, the second did not | New run directories that are never overwritten; reported run named explicitly; earlier runs in git history |
 
 | A correct answer ended `needs_review` because the critic said "revise" with no findings (only style advice: "remove the Evidence gaps section") | Verdict not tied to findings | A "revise" without any structured finding is treated as "approve"; the feedback stays in the trace |
 
 A first version of the completeness rule was too broad (critic demanded unrelated safety information; Q3/Q4 ended
-`needs_review` with bloated answers — run `2026-11-12T10-46-37Z`). It was narrowed to omissions that change or
+`needs_review` with bloated answers in an intermediate run). It was narrowed to omissions that change or
 qualify the answer.
 
 ## Remaining observations

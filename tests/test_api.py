@@ -36,14 +36,14 @@ class StubAgent:
 def client(monkeypatch):
     st = main.AgentState()
     monkeypatch.setattr(main, "state", st)
-    monkeypatch.setattr(st, "build", lambda: None)      # do not build a real index
+    monkeypatch.setattr(st, "start", lambda max_attempts=None: None)   # do not build a real index
     with TestClient(main.app) as c:
         yield c, st
 
 
 def make_ready(st, agent=None, error=""):
     st.agent, st.error = agent, error
-    st.ready.set()
+    st.status = "ready" if agent else "failed"
 
 
 def test_health_ok_while_index_building(client):
@@ -57,7 +57,8 @@ def test_health_ready(client):
     c, st = client
     make_ready(st, StubAgent())
     body = c.get("/health").json()
-    assert body == {"status": "ok", "index_ready": True, "documents": 21, "chunks": 525, "detail": ""}
+    assert body == {"status": "ok", "index_ready": True, "index_status": "ready", "build_attempts": 0,
+                    "documents": 21, "chunks": 525, "detail": ""}
 
 
 def test_ask_success(client):
@@ -101,22 +102,122 @@ def test_ask_unexpected_error_is_500_without_details(client):
     assert r.status_code == 500 and "secret" not in r.text
 
 
-def test_state_build_records_config_error(monkeypatch):
-    st = main.AgentState()
-    monkeypatch.setattr(main, "get_openai_client", lambda s: (_ for _ in ()).throw(ValueError("Missing OPENAI_MODEL")))
-    st.build()
-    assert st.ready.is_set() and st.agent is None and "OPENAI_MODEL" in st.error
+# --- startup index build: retries, backoff, rebuild on /ask (embedder mocked) ----------
+
+from tests.conftest import fake_embed  # noqa: E402
+from types import SimpleNamespace  # noqa: E402
 
 
-def test_state_build_hides_provider_error_details(monkeypatch):
-    class AuthenticationError(Exception):
-        pass
+class FlakyEmbeddingClient:
+    """Embedding client whose first ``failures`` calls raise a connection error."""
 
-    def fail(_settings):
-        raise AuthenticationError("Incorrect API key provided: sk-abc***xyz, org org-123")
+    def __init__(self, failures):
+        self.failures = failures
+        self.calls = 0
+        self.embeddings = SimpleNamespace(create=self.create)
 
-    st = main.AgentState()
-    monkeypatch.setattr(main, "get_openai_client", fail)
-    st.build()
-    assert st.error == "index build failed (AuthenticationError); see server logs"
-    assert "sk-" not in st.error and "org-" not in st.error
+    def create(self, model, input):
+        self.calls += 1
+        if self.calls <= self.failures:
+            raise openai.APIConnectionError(request=httpx.Request("POST", "http://llm/embeddings"))
+        return SimpleNamespace(data=[SimpleNamespace(index=i, embedding=fake_embed(t)) for i, t in enumerate(input)])
+
+
+@pytest.fixture
+def flaky(monkeypatch):
+    """Patch the client factory used by create_agent(); real loader, chunker and index builder run."""
+    def install(failures):
+        fake = FlakyEmbeddingClient(failures)
+        monkeypatch.setattr(main, "get_openai_client", lambda _settings: fake)
+        monkeypatch.setattr(main.settings, "openai_api_key", "test-key")
+        monkeypatch.setattr(main.settings, "openai_model", "test-model")
+        return fake
+    return install
+
+
+def run_build(st, max_attempts=None):
+    st.start(max_attempts).join(30)
+
+
+def test_build_retries_until_success(flaky):
+    flaky(failures=2)
+    st = main.AgentState(max_attempts=5, base_delay=0)
+    run_build(st)
+    assert st.status == "ready" and st.attempts == 3 and st.error == ""
+    assert len(st.agent.index.chunks) > 500
+
+
+def test_build_uses_exponential_backoff(flaky, monkeypatch):
+    flaky(failures=3)
+    sleeps = []
+    monkeypatch.setattr(main.time, "sleep", sleeps.append)
+    st = main.AgentState(max_attempts=5, base_delay=2)
+    run_build(st)
+    assert st.status == "ready" and sleeps == [2, 4, 8]
+
+
+def test_build_gives_up_after_max_attempts_and_hides_details(flaky):
+    flaky(failures=100)
+    st = main.AgentState(max_attempts=5, base_delay=0)
+    run_build(st)
+    assert st.status == "failed" and st.attempts == 5 and st.agent is None
+    assert st.error == "index build failed (APIConnectionError); see server logs"
+
+
+def test_missing_configuration_is_not_retried(monkeypatch):
+    monkeypatch.setattr(main.settings, "openai_api_key", "")
+    called = []
+    monkeypatch.setattr(main, "create_agent", lambda: called.append(1))
+    st = main.AgentState(max_attempts=5, base_delay=0)
+    run_build(st)
+    assert st.status == "failed" and called == [] and "OPENAI_API_KEY" in st.error
+
+
+def test_health_is_200_and_reports_failed_build(flaky, monkeypatch):
+    flaky(failures=100)
+    st = main.AgentState(max_attempts=2, base_delay=0)
+    run_build(st)
+    monkeypatch.setattr(main, "state", st)
+    monkeypatch.setattr(st, "start", lambda max_attempts=None: None)
+    with TestClient(main.app) as c:
+        r = c.get("/health")
+    assert r.status_code == 200
+    assert r.json()["index_status"] == "failed" and r.json()["build_attempts"] == 2
+
+
+def test_ask_triggers_rebuild_after_failed_startup(flaky, monkeypatch):
+    fake = flaky(failures=100)
+    st = main.AgentState(max_attempts=2, base_delay=0)
+    run_build(st)
+    assert st.status == "failed"
+    fake.failures = 0                     # provider is back
+    agent = StubAgent()
+    real_create = main.create_agent
+    monkeypatch.setattr(main, "create_agent", lambda: (real_create(), agent)[1])  # real build, stub answers
+    monkeypatch.setattr(main, "state", st)
+    original_start = st.start
+    started = []
+
+    def start(max_attempts=None):         # the app's lifespan start is a no-op here; record on-demand starts
+        if max_attempts is None:
+            return None
+        started.append(max_attempts)
+        return original_start(max_attempts)
+
+    monkeypatch.setattr(st, "start", start)
+    with TestClient(main.app) as c:
+        r = c.post("/ask", json={"question": "warfarin contraindications?"})
+    assert r.status_code == 200 and st.status == "ready"
+    assert started == [1]                 # exactly one on-demand attempt
+    assert agent.questions == ["warfarin contraindications?"]
+
+
+def test_ask_returns_503_when_on_demand_rebuild_also_fails(flaky, monkeypatch):
+    flaky(failures=100)
+    st = main.AgentState(max_attempts=1, base_delay=0)
+    run_build(st)
+    monkeypatch.setattr(main, "state", st)
+    with TestClient(main.app) as c:
+        r = c.post("/ask", json={"question": "warfarin contraindications?"})
+    assert r.status_code == 503 and "APIConnectionError" in r.json()["detail"]
+    assert st.attempts >= 2               # startup attempt + on-demand attempt

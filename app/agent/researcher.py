@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import json
 import logging
+
+import openai
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
@@ -85,9 +87,20 @@ def run_research(client, ctx: ToolContext, question: str, plan: Plan, coverage_n
 
     for iteration in range(1, settings.max_agent_iterations + 1):
         result.iterations = iteration
-        response = client.chat.completions.create(
-            model=settings.openai_model, messages=messages, tools=tool_schemas(), tool_choice="auto",
-        )
+        # Only model, messages and tools are sent: tool_choice defaults to "auto" when tools are given,
+        # and no sampling/length parameters are used, so any tool-capable chat model accepts the request.
+        try:
+            response = client.chat.completions.create(
+                model=settings.openai_model, messages=messages, tools=tool_schemas(),
+            )
+        except openai.BadRequestError as exc:
+            # The model/proxy rejected the request (e.g. no tool-calling support). Do not crash the request.
+            logger.warning("Research call rejected by the provider (%s)", exc)
+            if iteration == 1:
+                _fallback_retrieval(ctx, plan, result)
+            else:
+                result.stop_reason = "provider_rejected_request"
+            break
         msg = response.choices[0].message
         tool_calls = msg.tool_calls or []
 
@@ -131,6 +144,16 @@ def run_research(client, ctx: ToolContext, question: str, plan: Plan, coverage_n
         logger.warning("Research stopped at the iteration limit (%d)", settings.max_agent_iterations)
 
     return result
+
+
+def _fallback_retrieval(ctx: ToolContext, plan: Plan, result: ResearchResult) -> None:
+    """Non-agentic fallback when tool calling is unavailable: one search per planned sub-question."""
+    result.stop_reason = "tool_calling_unavailable_fallback_retrieval"
+    for sub_question in plan.sub_questions:
+        args = json.dumps({"query": sub_question[:500]})
+        tr = execute_tool("search_corpus", args, ctx)
+        result.tool_calls.append(ToolCallRecord(0, "search_corpus", args, tr.ok, _summarize(tr.output)))
+    logger.warning("Used fallback retrieval for %d sub-question(s)", len(plan.sub_questions))
 
 
 def _safe_load(raw: str) -> Any:

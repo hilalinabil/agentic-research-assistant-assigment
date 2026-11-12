@@ -72,7 +72,8 @@ def test_research_executes_tools_chosen_by_model_multi_hop(ctx):
     # tool schemas were offered to the model and observations returned with the right ids
     first = client.requests[0]
     assert {t["function"]["name"] for t in first["tools"]} == {"search_corpus", "read_source_document"}
-    assert first["tool_choice"] == "auto"
+    assert "tool_choice" not in first   # default ("auto") is used; no optional parameters are sent
+    assert set(first) == {"model", "messages", "tools"}
     second_msgs = client.requests[1]["messages"]
     tool_msgs = [m for m in second_msgs if m["role"] == "tool"]
     assert len(tool_msgs) == 2 and all(m["tool_call_id"] for m in tool_msgs)
@@ -358,3 +359,37 @@ def test_unparseable_critic_output_still_forces_revision(test_settings):
     r = review_answer(FakeLLMClient([completion("not json")]), test_settings, "q", ["q"], draft, led,
                       validate_citations(draft, led))
     assert r.verdict == "revise"   # the 'critic output unusable' override keeps it a revision
+
+
+# --- model portability: provider rejects the tool-calling request -------------------
+
+import httpx
+import openai
+
+
+def _bad_request():
+    return openai.BadRequestError("tools are not supported for this model",
+                                  response=httpx.Response(400, request=httpx.Request("POST", "http://llm/chat")),
+                                  body=None)
+
+
+def test_rejected_tool_request_falls_back_to_retrieval(ctx):
+    client = FakeLLMClient([_bad_request()])
+    res = run_research(client, ctx, "q", Plan(sub_questions=["warfarin contraindications", "apixaban contraindications"]))
+    assert res.stop_reason == "tool_calling_unavailable_fallback_retrieval"
+    assert [t.tool for t in res.tool_calls] == ["search_corpus", "search_corpus"] and len(ctx.ledger) > 0
+
+
+def test_rejected_later_request_keeps_gathered_evidence(ctx):
+    client = FakeLLMClient([completion(tool_calls=[tool_call("search_corpus", {"query": "warfarin contraindications"})]),
+                            _bad_request()])
+    res = run_research(client, ctx, "q", Plan(sub_questions=["q"]))
+    assert res.stop_reason == "provider_rejected_request" and len(ctx.ledger) > 0
+
+
+def test_every_chat_request_sends_only_portable_parameters(corpus_index, test_settings):
+    client = FakeLLMClient([plan_json(["Is it contraindicated?"]), *_research_script(),
+                            completion(GOOD), review_json("approve")])
+    ResearchAgent(client, test_settings, corpus_index).run("metformin eGFR 25?")
+    for req in client.requests:
+        assert set(req) <= {"model", "messages", "tools"}, set(req)

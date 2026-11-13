@@ -14,7 +14,9 @@ venv/
 # IDE
 .vscode/
 .idea/
-.claude/
+# Claude Code: personal settings stay local; shared .claude/ config is committed
+.claude/settings.local.json
+
 # OS
 .DS_Store
 
@@ -36,4 +38,3 @@ frontend/dist/
 
 # local documents 
 docs/t
-CLAUDE.md

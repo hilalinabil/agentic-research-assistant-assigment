@@ -170,8 +170,7 @@ log files as sensitive.
 ## Run locally
 
 ```bash
-# TODO(author): replace with the public GitLab URL before submission
-git clone https://gitlab.com/TODO/pharma-research-agent.git && cd pharma-research-agent
+git clone https://github.com/hilalinabil/agentic-research-assistant-assigment.git && cd agentic-research-assistant-assigment
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 cp .env.example .env            # fill in values
@@ -225,14 +224,14 @@ run the critic caught an omission in Q3 and one revision fixed it (see the manua
 - Corpus coverage is decided from filenames (one document per drug); a drug mentioned only inside another
   document (e.g. in an interaction table) is reported as "no dedicated document" although passages may exist.
 - Citation granularity is a whole passage unless the model read the exact section.
-- Each question costs ~5–12 LLM calls; latency 10–50 s. The index costs ~9 embedding calls per start.
+- Each question costs ~5–12 LLM calls; latency is typically 10–50 s, and complex multi-hop questions can take up to ~100 s. The index costs ~9 embedding calls per start.
 - English-only; corpus limited to 10 drugs. No conversation memory.
 
 ## AI coding configuration
 
 This project was built with Claude Code. Its configuration is committed: [`CLAUDE.md`](CLAUDE.md) (project
-instructions and conventions) and [`.claude/`](.claude) (shared permission settings and a `verify` skill). The master prompt and all follow-up instructions are in
-[`docs/ai-assistance/`](docs/ai-assistance). No MCP
+instructions and conventions) and [`.claude/`](.claude) (shared permission settings and a `verify` skill). The
+prompts for each development phase are in [`docs/phases/`](docs/phases) (`phase-0.pdf` … `phase-6.pdf`). No MCP
 servers were used. See the presentation outline in [`docs/PRESENTATION.md`](docs/PRESENTATION.md).
 
 ## Repository layout

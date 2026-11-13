@@ -140,6 +140,33 @@ docker run -p 8000:8000 --env-file .env agent
 Multi-stage build: Node 20 builds the frontend; `python:3.13-slim` runs uvicorn as a non-root user. The tokenizer
 is downloaded at build time; `.env`, tests and local files are excluded by `.dockerignore`.
 
+## Audit log
+
+Every `/ask` request (including failed ones: 503/502/500) appends one JSON line to
+`logs/data/audit-YYYY-MM-DD.jsonl` (UTC date). The directory can be changed with `AUDIT_LOG_DIR` and is created if
+missing. Entries are written by `app/audit/audit_log.py` in a FastAPI background task after the response is built,
+so logging never delays or alters the answer; write errors are logged as warnings and ignored. Requests rejected by
+validation (422) never reach the route and are not logged.
+
+| Field | Content |
+|---|---|
+| `request_id` | random UUID4 |
+| `timestamp` | UTC, ISO 8601 |
+| `request.question` | the question (whitespace-trimmed) |
+| `response` | `status` (`success`/`needs_review`/`insufficient_evidence`/`error`), `answer`, `citations`, `critic_verdict` |
+| `http_status`, `latency_ms` | HTTP status code and route latency |
+| `chat_model`, `embedding_model` | configured model names |
+| `error_type` | exception type when the request failed, else `null` |
+
+API keys, base URLs and prompts are never logged. To keep the logs after the container stops, mount a volume:
+
+```bash
+docker run -p 8000:8000 --env-file .env -v ./logs/data:/app/logs/data agent
+```
+
+**Privacy:** questions are stored exactly as typed. Do not enter patient-identifying information, and treat the
+log files as sensitive.
+
 ## Run locally
 
 ```bash
@@ -219,9 +246,11 @@ app/
   rag/                    evidence ledger + citation validation, grounded generator
   agent/                  tools, planner, research loop, critic, orchestrator
   schemas/                Pydantic models (documents, API)
+  audit/                  append-only JSONL audit log of /ask requests
   data/corpus/            the 21 source documents
 frontend/                 React + Vite UI
 eval/                     evaluation questions, runner, results, manual review
 tests/                    pytest suite (offline + integration-marked)
+logs/data/                audit log files (git-ignored)
 docs/                     architecture and presentation
 ```

@@ -124,3 +124,10 @@ def corpus_index() -> CorpusIndex:
     settings = Settings(openai_api_key="x", openai_model="m", openai_embedding_model="e")
     embedder = Embedder(client=FakeEmbeddingClient(), model="fake", batch_size=64)
     return build_index(settings, embedder)
+
+
+@pytest.fixture(autouse=True)
+def _isolated_audit_log(tmp_path, monkeypatch):
+    """Keep /ask audit entries written during tests out of the repository's logs/data/."""
+    monkeypatch.setenv("AUDIT_LOG_DIR", str(tmp_path / "audit"))
+    return tmp_path / "audit"

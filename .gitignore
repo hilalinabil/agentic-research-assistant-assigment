@@ -24,6 +24,9 @@ build/
 
 # Logs
 *.log
+# Audit log data (keep the folder)
+logs/data/*
+!logs/data/.gitkeep
 # Frontend
 frontend/node_modules/
 frontend/dist/

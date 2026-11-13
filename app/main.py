@@ -15,10 +15,12 @@ from contextlib import asynccontextmanager
 from typing import Optional
 
 import openai
-from fastapi import FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.agent.agent import ResearchAgent
+from app.audit import audit_log
 from app.core.config import settings
 from app.core.llm_client import get_openai_client
 from app.retrieval.embedder import Embedder
@@ -122,20 +124,38 @@ def health() -> HealthResponse:
 
 
 @app.post("/ask", response_model=AskResponse)
-def ask(request: AskRequest) -> AskResponse:
+def ask(request: AskRequest, background_tasks: BackgroundTasks):
+    started = time.perf_counter()
+    response, error_type, http_status, detail = None, None, 200, ""
     if not state.ensure_ready(timeout=INDEX_WAIT_SECONDS):
-        raise HTTPException(status_code=503, detail=f"Service not ready: {state.error or 'index still building'}")
-    try:
-        return state.agent.run(request.question)
-    except (openai.APIConnectionError, openai.APITimeoutError) as exc:
-        logger.error("LLM provider unreachable: %s", exc)
-        raise HTTPException(status_code=502, detail="The language-model provider could not be reached.")
-    except openai.APIError as exc:
-        logger.error("LLM provider error: %s", exc)
-        raise HTTPException(status_code=502, detail="The language-model provider returned an error.")
-    except Exception:
-        logger.exception("Unexpected error while answering")
-        raise HTTPException(status_code=500, detail="Internal error while answering the question.")
+        error_type, http_status = "ServiceNotReady", 503
+        detail = f"Service not ready: {state.error or 'index still building'}"
+    else:
+        try:
+            response = state.agent.run(request.question)
+        except (openai.APIConnectionError, openai.APITimeoutError) as exc:
+            logger.error("LLM provider unreachable: %s", exc)
+            error_type, http_status = type(exc).__name__, 502
+            detail = "The language-model provider could not be reached."
+        except openai.APIError as exc:
+            logger.error("LLM provider error: %s", exc)
+            error_type, http_status = type(exc).__name__, 502
+            detail = "The language-model provider returned an error."
+        except Exception as exc:
+            logger.exception("Unexpected error while answering")
+            error_type, http_status = type(exc).__name__, 500
+            detail = "Internal error while answering the question."
+
+    # Audit entry is written after the response is sent (background task); it never raises.
+    background_tasks.add_task(audit_log.record, request, response, {
+        "latency_ms": round((time.perf_counter() - started) * 1000, 1),
+        "http_status": http_status, "error_type": error_type,
+        "chat_model": settings.openai_model, "embedding_model": settings.openai_embedding_model,
+    })
+    if response is None:
+        # Same body/status as HTTPException, but a returned response keeps the background task.
+        return JSONResponse(status_code=http_status, content={"detail": detail})
+    return response
 
 
 # Serve the built React frontend (if present) at "/". Registered last so API routes take precedence.

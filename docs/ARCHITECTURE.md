@@ -36,7 +36,7 @@ sequenceDiagram
     I->>I: MarkdownSectionChunker — 525 section-aware chunks with line ranges
     I->>I: Embedder.embed_chunks() — 9 batched embedding calls
     I->>I: VectorStore.add() — L2-normalised float32 matrix
-    I-->>M: CorpusIndex ready (~15 s); /ask stops waiting
+    I-->>M: CorpusIndex ready (~15 s), /ask stops waiting
 ```
 
 The index is rebuilt at every start instead of cached on disk: the corpus is small, and a cache could go stale

@@ -232,7 +232,7 @@ run the critic caught an omission in Q3 and one revision fixed it (see the manua
 This project was built with Claude Code. Its configuration is committed: [`CLAUDE.md`](CLAUDE.md) (project
 instructions and conventions) and [`.claude/`](.claude) (shared permission settings and a `verify` skill). The
 prompts for each development phase are in [`docs/phases/`](docs/phases) (`phase-0.pdf` … `phase-6.pdf`). No MCP
-servers were used. See the presentation outline in [`docs/PRESENTATION.md`](docs/PRESENTATION.md).
+servers were used.
 
 ## Repository layout
 
@@ -251,5 +251,5 @@ frontend/                 React + Vite UI
 eval/                     evaluation questions, runner, results, manual review
 tests/                    pytest suite (offline + integration-marked)
 logs/data/                audit log files (git-ignored)
-docs/                     architecture and presentation
+docs/                     architecture 
 ```
